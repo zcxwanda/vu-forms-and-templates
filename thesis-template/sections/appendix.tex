@@ -41,7 +41,6 @@ This appendix provides the full resistance taxonomy used for constructing resist
 \end{table*}
 
 \subsection{Resistance Dimensions and Categories}
-\subsection{Resistance Dimensions and Categories}
 
 \begin{table*}[tb]
     \centering
@@ -180,6 +179,114 @@ This appendix provides the full resistance taxonomy used for constructing resist
 
 
 
+\section{Implementation Materials}
+\label{s:appendix-implementation-materials}
+
+This appendix summarizes the implementation materials used to generate the resistant-client conversations. The tables are intended to make the generation procedure easier to inspect without reproducing the full prompt files or source code.
+
+\subsection{Resistance Prompt Templates}
+
+Each resistant-client run uses one resistance sub-category. The prompt files follow the same general structure: they define the target behavior, give generation rules, add boundary rules to avoid overlap with nearby categories, and specify how the behavior should vary across expression levels. Table~\ref{tab:prompt-template-example} shows a shortened example based on the vague/minimal information prompt.
+
+\begin{table*}[tb]
+    \centering
+    \small
+    \tabcap{Shortened example of one resistance prompt template.}
+    \label{tab:prompt-template-example}
+    \begin{tabular}{p{0.22\linewidth}p{0.68\linewidth}}
+        \toprule
+        \thead{Prompt part} & \thead{Example content} \\
+        \midrule
+        Target behavior &
+        The patient gives a relevant but underspecified answer. The answer should respond to the question only broadly and leave clinically useful details unclear. \\
+
+        Generation rules &
+        Keep the response grounded in the clinical profile. Do not invent a new symptom to make the answer vague. Avoid giving precise frequency, severity, duration, or functional-impact details unless they are already unavoidable from the profile. \\
+
+        Boundary rules &
+        Do not turn the response into complete silence, topic blocking, denial, or agenda redirection. The answer should still be connected to the current question, but it should not provide enough detail for a clear clinical interpretation. \\
+
+        Expression-level guidance &
+        Level 1 gives a brief but still partly useful answer; Level 2 gives a noticeably vague answer; Level 3 gives a very limited answer that remains relevant but is hard to interpret. \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\subsection{Truth Map Table}
+
+Truth maps are used only for reframing sub-categories. They mark whether each questionnaire item is positive, negative, or unknown for a clinical profile. The generation code uses the positive items as eligible targets for minimization, externalization, and denial. Table~\ref{tab:truth-map-positive} shows the profile-positive questionnaire items used in the current experiment.
+
+\begin{table*}[tb]
+    \centering
+    \small
+    \tabcap{Profile-positive questionnaire items used for reframing eligibility.}
+    \label{tab:truth-map-positive}
+    \begin{tabular}{p{0.16\linewidth}p{0.16\linewidth}p{0.58\linewidth}}
+        \toprule
+        \thead{Clinical profile} & \thead{Positive item IDs} & \thead{Supported content} \\
+        \midrule
+        Depression & 1, 2, 14, 15 & Reduced interest, depressed or hopeless mood, sleep problems, and memory problems. \\
+        Anxiety & 3, 6, 8, 9, 14, 17 & Irritability, anxiety or worry, avoidance, physical tension or aches, sleep problems, and repeated checking. \\
+        PTSD & 1, 3, 6, 7, 8, 14, 16, 20, 21 & Reduced positive emotion, irritability, anxiety, panic or fear, avoidance, sleep problems, intrusive thoughts or images, social detachment, and alcohol use. \\
+        Bipolar & 1, 2, 3, 4, 5, 14, 20 & Depressive symptoms, irritability, reduced need for sleep with high energy, increased projects or risky behavior, sleep problems, and social withdrawal. \\
+        Schizophrenia & 1, 12, 13, 14, 15, 20 & Reduced pleasure, auditory hallucinations, thought broadcasting concerns, sleep problems, memory problems, and social disconnection. \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+\subsection{Activation Settings}
+
+Resistance intensity controls the expected frequency of activated resistance turns. When a turn is activated, an expression level is also sampled. Expression level changes how strongly the selected sub-category appears in that response, but it is not treated as a separate experimental condition. The main settings used in the current implementation are shown in Table~\ref{tab:activation-settings}.
+
+\begin{table*}[tb]
+    \centering
+    \small
+    \tabcap{Turn-level activation and expression settings.}
+    \label{tab:activation-settings}
+    \begin{tabular}{p{0.18\linewidth}p{0.30\linewidth}p{0.40\linewidth}}
+        \toprule
+        \thead{Intensity} & \thead{Target activation range} & \thead{Expression-level probabilities} \\
+        \midrule
+        Low & 0.15--0.30 & Level 1: 0.44; Level 2: 0.28; Level 3: 0.28 \\
+        Medium & 0.40--0.60 & Level 1: 0.28; Level 2: 0.44; Level 3: 0.28 \\
+        High & 0.70--0.85 & Level 1: 0.28; Level 2: 0.28; Level 3: 0.44 \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+For non-reframing categories, activation can be considered on every ordinary patient-answer turn. For reframing categories, activation is limited by the truth map. This means that a high-intensity reframing run can still have fewer activated turns than a high-intensity non-reframing run if the clinical profile has fewer positive questionnaire items. A cooldown rule is also used to reduce unnatural back-to-back activations, so the observed activation rate may not exactly match the sampled target rate in every conversation.
+
+\subsection{Example Conversation Excerpts}
+
+Table~\ref{tab:example-excerpts} gives shortened representative excerpts from generated resistant-client conversations. These excerpts are shown only for illustration. They were not included in the prompts used to generate the conversations.
+
+\begin{table*}[tb]
+    \centering
+    \small
+    \tabcap{Shortened examples of generated resistant-client responses.}
+    \label{tab:example-excerpts}
+    \begin{tabular}{p{0.20\linewidth}p{0.30\linewidth}p{0.40\linewidth}}
+        \toprule
+        \thead{Sub-category} & \thead{Assistant question} & \thead{Patient response excerpt} \\
+        \midrule
+        Vague/minimal information & How has this affected your work and daily responsibilities? & ``It is just harder to get things done, I guess.'' \\
+        Silence/nonresponse & How long have you been feeling this way? & ``I...'' / \texttt{[silence]} \\
+        Topic shift/inattention & Have you heard voices that other people could not hear? & ``Voices... I was just noticing the traffic outside. It has been loud all morning.'' \\
+        Irrelevant verbosity & Have you lost interest in activities you usually enjoy? & ``I used to read, and there are still books by the couch, and the remote is usually somewhere nearby, and sometimes I think about the garden...'' \\
+        Minimization/normalization & Problems with sleep that affected your sleep quality overall? & ``I wake up earlier sometimes, but I would not say it is a serious problem. I still get by.'' \\
+        Externalization/blaming & Feeling down, depressed, or hopeless? & ``It is mostly because of the job situation. Anyone would feel off with that much pressure.'' \\
+        Denial/dismissal & Problems with sleep that affected your sleep quality overall? & ``I would not say my sleep is really a problem.'' \\
+        Challenging assessment or intent & Have you heard voices that other people could not hear? & ``I do not really understand why that question is relevant to how I have been feeling.'' \\
+        Dismissive/hostile criticism & Have you heard voices that other people could not hear? & ``Are you serious with that question? This feels like a useless checklist.'' \\
+        Topic blocking/conditional engagement & How has your sleep been affected recently? & ``I can talk about that, but I do not want to get into all the details right now.'' \\
+        Agenda redirection & Have you lost interest in activities you usually enjoy? & ``Could I explain how all this started first? I think that would make more sense.'' \\
+        Demanding immediate diagnosis & How has your sleep been affected recently? & ``Can you just tell me what is going on with me? I need to know what this is.'' \\
+        \bottomrule
+    \end{tabular}
+\end{table*}
+
+
+\iffalse
 \section*{Ethics}\label{s:ethical-considerations-appendix}
 
 \emph{Based on the USENIX Security Symposium's policy on ethical considerations}~\cite{secethics}.
@@ -220,6 +327,7 @@ documenting everything in scope for all the artifact evaluation badges
 Reproduced}). More information at~\cite{secartifacts}.
 
 \input{sections/usenix-ae.tex}
+\fi
 
 %%% Local Variables:
 %%% mode: latex
