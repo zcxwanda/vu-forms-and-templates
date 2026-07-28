@@ -1,13 +1,104 @@
 \section{Results}\label{s:results}
 
-Discuss the design of your experiments, the results you obtained, and how they
-help in evaluating the claims you made in the introduction. You may also use the
-evaluation results in this section to justify your design choices or assess the
-contributions of different aspects  of your design towards the overall goals.
+This section reports the results of the resistant-client simulation experiment.
+The results are organized around the research questions introduced in
+Section~\ref{s:experimental-setup}. I first describe the evaluated dialogue set
+and check whether the resistance manipulation worked as intended. I then report
+conversation-quality results, diagnostic-quality results, the relation between
+conversation and diagnostic quality, and descriptive conversation
+characteristics.
 
-\subsection{\yifan{Conversation quality (RQ1)}}
-\subsubsection{\yifan{overall conversation quality}}
-\subsubsection{\yifan{performance vary across different resistance categories}}
+\subsection{Evaluated Dialogue Set}
+
+The current analysis uses 925 generated conversations. This includes 25
+cooperative baseline conversations and 900 resistant-client conversations. The
+resistant-client conversations are balanced across the three resistance
+intensity settings: 300 low-intensity conversations, 300 medium-intensity
+conversations, and 300 high-intensity conversations. Each resistant intensity
+condition covers the same five clinical profiles and the same twelve resistance
+subcategories. This structure allows the analysis to compare the cooperative
+baseline with resistant-client conditions while also comparing different
+resistance intensities and resistance categories.
+
+\begin{table}[t]
+\centering
+\caption{Number of evaluated conversations by condition.}
+\label{tab:results-dataset-size}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrr}
+\toprule
+Condition & Conversations & Notes \\
+\midrule
+Cooperative baseline & 25 & Five clinical profiles across repeated runs \\
+Low resistance & 300 & Twelve resistance subcategories \\
+Medium resistance & 300 & Twelve resistance subcategories \\
+High resistance & 300 & Twelve resistance subcategories \\
+\midrule
+Total & 925 & -- \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\subsection{Resistance Manipulation Check}
+
+Before interpreting the downstream evaluation scores, I first checked whether
+the generated patient behaviour reflected the intended resistance condition.
+This check is important because the experiment depends on the patient agent
+actually producing resistance when a resistant profile is activated.
+
+The post-hoc resistance-fidelity scores were high across all three intensity
+conditions. On a five-point scale, the mean fidelity score was 4.90 for low
+intensity, 4.89 for medium intensity, and 4.91 for high intensity. This suggests
+that the generated resistant turns usually matched the intended resistance
+subcategory rather than drifting into unrelated behaviour.
+
+The activation rate also increased with the intended intensity. Low-intensity
+conversations had resistance in 17.0\% of patient turns, medium-intensity
+conversations had resistance in 36.9\% of patient turns, and high-intensity
+conversations had resistance in 59.4\% of patient turns. This shows that the
+intensity mechanism successfully changed how often resistance appeared in the
+conversation.
+
+\begin{table}[t]
+\centering
+\caption{Post-hoc manipulation-check metrics by resistance intensity.}
+\label{tab:manipulation-check}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Intensity & Overall & Withholding & Reframing & Diverting & Controlling & Contesting & Fidelity & Yield \\
+\midrule
+Low & 0.170 & 0.211 & 0.064 & 0.213 & 0.194 & 0.206 & 4.90 & 4.43 \\
+Medium & 0.369 & 0.456 & 0.126 & 0.456 & 0.452 & 0.437 & 4.89 & 3.80 \\
+High & 0.594 & 0.724 & 0.202 & 0.720 & 0.720 & 0.739 & 4.91 & 3.06 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The lower activation rate for reframing categories is expected. These categories
+use the truth map and are only activated when the questionnaire item asks about a
+symptom that is present in the clinical profile. In contrast, withholding,
+diverting, controlling, and contesting resistance can be expressed on a wider
+range of questionnaire items, so their activation rates are closer to the target
+range for each intensity condition.
+
+The manipulation check also shows that increasing resistance intensity reduced
+the amount of usable information available in the dialogue. The overall
+information-yield score decreased from 4.43 in the low-intensity condition to
+3.80 in the medium-intensity condition and 3.06 in the high-intensity condition.
+This pattern supports the basic assumption of the experiment: stronger
+resistance does not only change the surface style of patient responses, but also
+changes how much clinically useful information the conversation provides.
+
+\subsection{Conversation Quality (RQ1)}
+
+\subsection{Diagnostic Quality (RQ2)}
+
+\subsection{Association Between Conversation and Diagnostic Quality (RQ3)}
+
+\subsection{Conversation Characteristics (RQ4)}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../thesis"
