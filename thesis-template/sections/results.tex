@@ -1,31 +1,11 @@
 \section{Results}\label{s:results}
 
-This section reports the results of the resistant-client simulation experiment. The results are organized around the research questions introduced in Section~\ref{s:experimental-setup}. I first describe the evaluated dialogue set and check whether the resistance manipulation worked as intended, then report conversation-quality results, diagnostic-quality results, the relation between conversation and diagnostic quality, and descriptive conversation characteristics.
-
-\subsection{Evaluated Dialogue Set}
-
-The current analysis uses 925 generated conversations. This includes 25 cooperative baseline conversations and 900 resistant-client conversations. The resistant-client conversations are balanced across the three resistance
-intensity settings: 300 low-intensity conversations, 300 medium-intensity conversations, and 300 high-intensity conversations. Each resistant intensity condition covers the same five clinical profiles and the same twelve resistance subcategories. This structure allows the analysis to compare the cooperative baseline with resistant-client conditions while also comparing different resistance intensities and resistance categories.
-
-\begin{table}[t]
-\centering
-\caption{Number of evaluated conversations by condition.}
-\label{tab:results-dataset-size}
-\resizebox{\linewidth}{!}{%
-\begin{tabular}{lrr}
-\toprule
-Condition & Conversations & Notes \\
-\midrule
-Cooperative baseline & 25 & Five clinical profiles across repeated runs \\
-Low resistance & 300 & Twelve resistance subcategories \\
-Medium resistance & 300 & Twelve resistance subcategories \\
-High resistance & 300 & Twelve resistance subcategories \\
-\midrule
-Total & 925 & -- \\
-\bottomrule
-\end{tabular}
-}
-\end{table}
+This section reports the results of the resistant-client simulation experiment.
+The results are organized around the research questions introduced in
+Section~\ref{s:experimental-setup}. I first check whether the resistance
+manipulation worked as intended. I then report conversation-quality results,
+diagnostic-quality results, the relation between conversation and diagnostic
+quality, and descriptive conversation characteristics.
 
 \subsection{Resistance Manipulation Check}
 
@@ -165,6 +145,103 @@ such as withholding information, redirecting the conversation, or challenging
 the assessment.
 
 \subsection{Diagnostic Quality (RQ2)}
+
+RQ2 asks whether profile-based resistant clients influence diagnostic quality,
+and whether this influence differs across resistance categories. Compared with
+conversation quality, the diagnostic results were more stable. Resistant-client
+simulation did not cause a large collapse in diagnostic performance, although
+some decline is visible under high-intensity resistance and in specific
+resistance categories.
+
+The cooperative baseline reached a classification match score of 1.00 and a
+text-match score of 0.96. The resistant conditions remained close to this level.
+Classification match was 0.973 for low resistance, 0.980 for medium resistance,
+and 0.957 for high resistance. Text match showed a similar but slightly noisier
+pattern, with scores of 0.950, 0.940, and 0.930 for low, medium, and high
+resistance respectively. These results suggest that the diagnostic agent was
+often still able to recover the correct broad diagnosis even when the
+conversation became less cooperative.
+
+\begin{table}[t]
+\centering
+\caption{Diagnostic-quality scores by resistance intensity.}
+\label{tab:rq2-intensity}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Classification & Text match & Confidence & Justification & Certainty \\
+\midrule
+Baseline & 1.000 & 0.960 & 5.00 & 4.71 & -- \\
+Low & 0.973 & 0.950 & 4.97 & 4.72 & 3.76 \\
+Medium & 0.980 & 0.940 & 4.97 & 4.70 & 3.69 \\
+High & 0.957 & 0.930 & 4.96 & 4.39 & 3.49 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figs/results/rq2_diagnostic_accuracy_by_intensity.png}
+\caption{Diagnostic classification and text-match accuracy by resistance
+intensity.}
+\label{fig:rq2-diagnostic-accuracy}
+\end{figure}
+
+The original evaluator's confidence score stayed very high across all
+conditions, decreasing only from 5.00 in the baseline to 4.96 in the
+high-resistance condition. This means that the evaluator usually classified the
+diagnosis as correct with high confidence. However, the post-hoc diagnostic
+certainty metric shows a slightly different pattern: diagnostic certainty
+decreased from 3.76 in the low-resistance condition to 3.69 in the
+medium-resistance condition and 3.49 in the high-resistance condition. In other
+words, the final diagnostic text became somewhat less certain as resistance
+increased, but this decrease was modest compared with the stronger decline in
+client-side information yield reported for RQ1.
+
+Category-level results show that diagnostic quality varied by resistance type.
+Contesting resistance had the lowest classification match among the resistant
+categories, at 0.940. Withholding was also lower than most other categories, at
+0.967. Diverting and controlling remained relatively high, while reframing had
+the highest classification match, at 0.982. This is consistent with the RQ1
+results: categories that disrupt the structure of the assessment or challenge
+the interaction appear more harmful to diagnosis than reframing, which often
+still leaves some usable clinical information in the dialogue.
+
+\begin{table}[t]
+\centering
+\caption{Diagnostic-quality scores by resistance category.}
+\label{tab:rq2-category}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Resistance category & Classification & Text match & Confidence & Certainty \\
+\midrule
+Withholding & 0.967 & 0.940 & 4.97 & 3.46 \\
+Reframing & 0.982 & 0.933 & 4.96 & 3.83 \\
+Diverting & 0.973 & 0.980 & 4.99 & 3.97 \\
+Controlling & 0.978 & 0.938 & 4.96 & 3.44 \\
+Contesting & 0.940 & 0.913 & 4.96 & 3.57 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figs/results/rq2_diagnostic_certainty_by_category.png}
+\caption{Post-hoc diagnostic certainty by resistance category and intensity.}
+\label{fig:rq2-diagnostic-certainty}
+\end{figure}
+
+Overall, RQ2 is only partially supported. Resistant clients did not strongly
+reduce the system's primary diagnostic accuracy, especially when enough core
+symptom information remained available. However, high-intensity resistance and
+contesting-style resistance showed the clearest diagnostic degradation. The
+combination of high diagnostic accuracy and high evaluator confidence also
+suggests that the diagnostic pipeline is robust in this setting, but may not be
+very sensitive to the uncertainty introduced by resistant or incomplete patient
+answers.
 
 \subsection{Association Between Conversation and Diagnostic Quality (RQ3)}
 
