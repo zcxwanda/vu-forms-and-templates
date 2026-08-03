@@ -62,7 +62,7 @@ The assigned intensity is implemented through both programmatic controls and pro
 
 Some resistance types require additional profile grounding. Reframing behaviors, including minimization, externalization, and denial, are only meaningful when the current questionnaire item refers to a symptom that should
 be present in the assigned clinical profile. For these sub-categories, a profile-specific truth map is used to identify profile-positive questionnaire items. The truth map prevents the patient from denying, minimizing, or
-explaining away symptoms that are not part of the case, which would create profile-ungrounded clinical content. As a result, reframing conditions can have a lower observed activation rate than other resistance categories: resistance is only applied on turns where the questionnaire item is eligible according to the truth map. Additional implementation materials, including resistance prompt-template summaries, truth-map examples, activation settings, and dialogue excerpts, are provided in Appendix~\ref{s:appendix-implementation-materials}.
+explaining away symptoms that are not part of the case, which would create profile-ungrounded clinical content. As a result, reframing conditions can have a lower observed activation rate than other resistance categories: resistance is only applied on turns where the questionnaire item is eligible according to the truth map. Additional implementation materials, including resistance prompt-template summaries, truth-map examples, activation settings, and dialogue examples, are provided in Appendix~\ref{s:appendix-implementation-materials}.
 
 \subsection{Conversation Logs and Metadata}
 
@@ -117,11 +117,11 @@ classification confidence. These metrics measure whether the final diagnostic ou
 The original evaluator mainly evaluates the assistant side and the final diagnosis. However, resistant-client simulation also needs to check whether the client behavior itself was successfully generated. For this reason, this thesis adds four client-side post-hoc metrics.
 
 Resistance fidelity measures whether activated resistant turns match the target resistance sub-category. This metric is computed only for turns where resistance was activated. Question responsiveness measures how directly the patient answer responds to the assistant's current question. Information yield measures how much usable clinical information the patient answer provides,
-including whether the answer contains enough relevant information for the assessment rather than only words or peripheral detail. Diagnostic certainty measures how confident or tentative the final diagnostic text appears.
+including whether the answer contains enough relevant information for the assessment rather than only words or unimportant detail. Diagnostic certainty measures how confident the final diagnostic text appears.
 
 Question responsiveness and information yield are computed both over all patient turns and over activated resistant turns. The activated-turn version shows the local effect of resistance, while the all-turn version shows the overall effect on the full conversation. This distinction is useful because a conversation may contain several resistant turns while still providing enough clinical information elsewhere for the diagnostic agent to make a correct diagnosis.
 
-\subsubsection{Deterministic Conversation Characteristics}
+\subsubsection{Conversation Characteristics}
 
 In addition to rubric-based and LLM-judged metrics, the analysis includes deterministic text features derived directly from the chat logs. These features include the mean length of patient answers, the mean length of activated resistant answers, the rate of very short answers, and the rate of nonresponses. These features are not written back into the original chat logs because they are post-hoc descriptive statistics rather than part of the generation process.
 
