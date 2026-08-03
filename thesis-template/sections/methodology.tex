@@ -1,2 +1,30 @@
 \section{Methodology}\label{s:methodology}
+This chapter describes the method used to generate profile-based resistant clients in DSM5AgentFlow. The proposed method changes how the patient agent responds during the assessment, while keeping the questionnaire and the underlying clinical profile unchanged. The method combines resistance profiles, intensity control, and profile-grounding rules. These components determine when resistance appears and how it is expressed while keeping the simulated clinical case fixed.
+
+\subsection{Resistant-Client Generation}
+For each resistant-client condition, the patient agent is assigned a clinical profile and a resistance configuration. The clinical profile describes the simulated client's disorder, symptoms, and relevant background information. The resistance configuration specifies which resistant subcategory the patient agent should simulate and at what intensity.
+
+The resistance configuration is translated into a prompt instruction for the patient agent. Rather than providing a fixed answer for the patient to copy, the instruction describes the target behavior and the conditions under which it should appear. For example, a prompt may instruct the patient agent to give a vague answer, include irrelevant details, redirect the conversation, or avoid discussing a particular topic. This allows the same resistance subcategory to produce different responses for different questionnaire items and dialogue contexts.
+
+Each resistance prompt contains several types of guidance. It identifies the intended behavior, describes how the behavior should affect the response, and includes boundaries that distinguish it from nearby resistance subcategories. The prompt also includes a grounding requirement: the response should remain consistent with the assigned clinical profile and should not introduce unsupported clinical symptoms merely to produce resistance. A shortened example of this prompt structure is shown in Table~\ref{tab:prompt-template-example}.
+
+The use of the resistance instruction is controlled at the turn level. The implementation of the intensity setting, including when the resistance behavior is expressed and how strongly it appears, is described in the following subsection.
+
+
+\subsection{Intensity Control}
+Resistance intensity is implemented through turn-level activation and response-level expression. The experiment uses three intensity settings: low, medium, and high. The three intensity settings control how frequently and how strongly resistance appears across the conversation, rather than forcing every patient response to be resistant.
+
+Before each patient response is generated, the system determines whether resistance should be expressed in the current turn. If resistance is not activated, the patient agent responds using the clinical profile without the resistance instruction. If resistance is activated, the prompt for the selected resistance subcategory is added to the patient instruction.
+
+Each intensity setting is associated with a target activation range, and the low, medium, and high settings use progressively higher target activation ranges. At the start of each conversation, the system randomly selects one target activation rate from the range for the chosen intensity. For each following turn, it uses the previous activation decisions to adjust the probability of activating resistance. The target rate therefore guides the overall frequency of resistance, but does not prescribe the exact number or position of resistant turns.
+
+Expression levels were introduced after preliminary testing showed that resistance responses often reused similar wording. Each resistance profile therefore defines three levels that provide progressively stronger guidance for expressing the selected subcategory. The levels are soft prompt cues rather than fixed response templates. The patient agent may therefore express the selected subcategory using different wording and details across turns. The sampling probabilities are slightly adjusted across intensity settings, as shown in Table~\ref{tab:activation-settings}. This introduces some intensity-related variation without treating expression level as a separate experimental factor. Examples of the prompt structure and expression-level guidance are provided in Appendix~\ref{s:appendix-implementation-materials}. 
+
+A cooldown is used to prevent resistant responses from clustering in consecutive turns. After resistance is activated, the probability of activation is temporarily reduced, resulting in a more even distribution of resistance across the conversation.
+
+\subsection{Truth Maps for Reframing}
+
+
+
+
 

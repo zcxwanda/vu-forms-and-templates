@@ -15,9 +15,8 @@ The original setting mainly assumes a cooperative simulated patient. The patient
 
 In DSM5AgentFlow, simulated patients are generated from clinical profiles. A clinical profile specifies the target disorder, relevant symptoms, and sometimes the response style of the simulated client. In this thesis, the clinical profile serves as the grounding source for patient generation: clinically meaningful answers should remain consistent with the assigned profile.
 
-This grounding requirement is important because the generated dialogue is later used for diagnostic evaluation. If the patient agent introduces symptoms that are not supported by the clinical profile, or denies symptoms that should be present in the profile, the diagnostic component may base its output on information that does not match the intended case. This can make the conversation harder to interpret and may confound the evaluation of diagnostic quality.
+This grounding requirement is important because the generated dialogue is later used for diagnostic evaluation. If the patient agent introduces symptoms that are not supported by the clinical profile, the diagnostic component may base its output on information that does not match the intended case. This can make the conversation harder to interpret and may confound the evaluation of diagnostic quality. This grounding problem is especially relevant for resistance behaviors that reframe or deny symptoms. For this reason, the resistant-client generation method introduced in Section~\ref{s:methodology} includes additional grounding controls for these cases.
 
-To reduce this problem for reframing-based resistance, I introduce profile-specific truth maps. A truth map records which questionnaire items are supported by each clinical profile. Reframing behaviors, including minimization, externalization, and denial, are only eligible for activation on profile-positive questionnaire items. In other words, the simulated client can minimize, explain away, or deny a symptom only when that symptom is expected to be present according to the assigned clinical profile. This reduces one source of profile-ungrounded symptom generation in reframing-based resistance conditions.
 
 \subsection{Client Resistance}
 
@@ -35,9 +34,10 @@ This distinction is useful because different forms of resistance may affect the 
 
 \begin{table}[tb]
     \centering
+    \small
     \tabcap{Summary of resistance dimensions and categories.}
     \label{tab:resistance-summary}
-    \begin{tabular}{lll}
+    \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} p{0.22\linewidth} X@{}}
         \toprule
         \thead{Dimension} & \thead{Category} & \thead{Example subcategories} \\
         \midrule
@@ -47,5 +47,5 @@ This distinction is useful because different forms of resistance may affect the 
         Interaction & Contesting & Challenging assessment; hostile criticism \\
         Interaction & Controlling & Topic blocking; agenda redirection; demanding diagnosis \\
         \bottomrule
-    \end{tabular}
+    \end{tabularx}
 \end{table}
