@@ -28,7 +28,7 @@ The resistance materials consist of the taxonomy described in Appendix~\ref{s:ap
 \paragraph{Main Simulated Conversation Dataset.}
 The main dataset uses a controlled factorial design. For each of the five clinical profiles, I generate one cooperative baseline condition and resistant-client conditions across 12 resistance subcategories and three intensity settings: low, medium, and high. Each condition is repeated five times. This gives a planned dataset size of $5 \times 5 \times (12 \times 3 + 1) = 925$ conversation logs.
 
-Each log is one simulated DSM-5 assessment conversation. It contains the assistant--patient dialogue, the clinical observation, the final diagnostic output, and metadata describing the experimental condition. For resistant-client conversations, the metadata records the resistance dimension, category, subcategory, intensity, activation information, and turn-level generation information. Cooperative baseline logs use the same clinical profiles and questionnaire, but do not include a resistance profile.
+Each log is one simulated DSM-5 assessment conversation. It contains the assistant--patient dialogue, the clinical observation, the final diagnostic output, and metadata describing the experimental condition. For resistant-client conversations, the metadata records the resistance dimension, category, subcategory, intensity, activation decisions, and expression levels. These metadata fields are used only for post-hoc analysis. They are not shown to the assistant agent during the conversation and are not used by the diagnostic agent when it generates the final diagnosis. Cooperative baseline logs use the same clinical profiles and questionnaire, but do not include a resistance profile.
 
 \begin{table}[t]
 \centering
@@ -63,13 +63,6 @@ The assigned intensity is implemented through both programmatic controls and pro
 Some resistance types require additional profile grounding. Reframing behaviors, including minimization, externalization, and denial, are only meaningful when the current questionnaire item refers to a symptom that should
 be present in the assigned clinical profile. For these sub-categories, a profile-specific truth map is used to identify profile-positive questionnaire items. The truth map prevents the patient from denying, minimizing, or
 explaining away symptoms that are not part of the case, which would create profile-ungrounded clinical content. As a result, reframing conditions can have a lower observed activation rate than other resistance categories: resistance is only applied on turns where the questionnaire item is eligible according to the truth map. Additional implementation materials, including resistance prompt-template summaries, truth-map examples, activation settings, and dialogue examples, are provided in Appendix~\ref{s:appendix-implementation-materials}.
-
-\subsection{Conversation Logs and Metadata}
-
-Each generated conversation is saved as a chat log. The log contains the assistant and patient turns, the clinical observation, the final diagnosis, and metadata describing the experimental condition. For resistant conversations, the log records the resistance dimension, category, sub-category, and intensity.
-
-The log also stores turn-level generation metadata for patient responses, including whether resistance was activated and which expression level was used. These labels are stored for analysis only. They are not shown to the assistant agent during the conversation and are not used by the diagnostic agent when it generates the final diagnosis. This keeps the diagnostic task realistic: the
-diagnostic agent must diagnose from the dialogue content rather than from hidden experimental labels.
 
 
 \subsection{Evaluation Metrics}
