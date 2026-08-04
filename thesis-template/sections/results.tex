@@ -11,13 +11,13 @@ quality, and descriptive conversation characteristics.
 
 Before reporting the evaluation results, I first checked whether the generated patient behaviour reflected the intended resistance condition. The experiment depends on the patient agent producing the assigned resistance subcategory on activated turns.
 
-Resistance-fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. The small difference across intensities indicates that fidelity remained stable while activation frequency changed.
+Resistance-fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. Fidelity therefore changed little across intensities.
 
 The activation rate increased with the intended intensity. Low-intensity conversations had resistance in 17.0\% of patient turns, medium-intensity conversations in 36.9\%, and high-intensity conversations in 59.4\%.
 
 \begin{table}[t]
 \centering
-\caption{Activation rates across resistance categories, with mean resistance fidelity and information yield, by intensity.}
+\caption{Resistance activation by category, fidelity, and information yield at each intensity.}
 \label{tab:manipulation-check}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrrrrrr}
@@ -34,19 +34,16 @@ High & 0.594 & 0.724 & 0.202 & 0.720 & 0.720 & 0.739 & 4.91 & 3.06 \\
 }
 \end{table}
 
-Reframing had a lower activation rate because these categories use the truth map and are only activated when the questionnaire item asks about a
-symptom that is present in the clinical profile. In contrast, withholding, diverting, controlling, and contesting resistance can be expressed on a larger number of questionnaire items, so their activation rates are closer to the target range for each intensity condition.
+Reframing had a lower activation rate because the truth map limits it to questions about symptoms present in the clinical profile. The other categories can be used with more questionnaire items, so their activation rates were closer to the target range for each intensity.
 
-Increasing resistance intensity was also accompanied by a reduction in usable information. The overall
-information-yield score decreased from 4.43 in the low-intensity condition to 3.80 in the medium-intensity condition and 3.06 in the high-intensity condition.
-Thus, higher observed activation rates occurred together with lower information-yield scores.
+Information yield fell as resistance intensity increased. The mean score was
+4.43 at low intensity, 3.80 at medium intensity, and 3.06 at high intensity.
 
 \subsection{Conversation Quality (RQ1)}
 
 RQ1 asks whether profile-based resistant clients influence overall conversation quality, and whether this influence differs across resistance categories. The conversation-quality measures generally decreased as resistance intensity increased.
 
-Using the conversation-quality rubrics adopted from DSM5AgentFlow, the cooperative baseline received a mean rubric score of 3.04. The mean was 2.90 for low resistance, 2.85 for medium resistance, and 2.69 for high resistance. The individual rubric components did not change uniformly. The largest differences between the baseline and high-resistance conditions were visible in DSM coverage, consistency, and empathy. For example, consistency decreased from 1.96 in the baseline to 1.39 in
-the high-resistance condition, and empathy decreased from 2.04 to 1.50. Table~\ref{tab:rq1-intensity} gives the corresponding values, and Figure~\ref{fig:rq1-rubric-components} visualizes the same pattern across the individual rubric components.
+Using the conversation-quality rubrics adopted from DSM5AgentFlow, the cooperative baseline received a mean rubric score of 3.04. The mean was 2.90 for low resistance, 2.85 for medium resistance, and 2.69 for high resistance. The rubric components changed by different amounts. The largest differences between the baseline and high-resistance conditions were in DSM coverage, consistency, and empathy. For example, consistency decreased from 1.96 to 1.39, and empathy decreased from 2.04 to 1.50. Table~\ref{tab:rq1-intensity} reports all scores, and Figure~\ref{fig:rq1-rubric-components} shows the individual components.
 
 \begin{table}[t]
 \centering
@@ -67,12 +64,12 @@ High & 2.69 & 2.02 & 4.38 & 1.39 & 1.50 & 3.21 & 3.06 \\
 \end{table}
 
 The patient-response metrics show a larger change. The cooperative
-baseline was close to the ceiling, with a mean question-responsiveness score of
+baseline was close to the maximum, with a mean question-responsiveness score of
 4.98 and a mean information-yield score of 4.97. These scores decreased as
 resistance intensity increased: question responsiveness decreased to 4.53, 3.92,
 and 3.21 for the low-, medium-, and high-resistance conditions respectively.
 Overall information yield showed the same pattern, decreasing to 4.43, 3.80,
-and 3.06. Figure~\ref{fig:rq1-client-usability} shows this monotonic
+and 3.06. Figure~\ref{fig:rq1-client-usability} shows this steady
 decrease in the patient-response metrics.
 
 \begin{figure}[t]
@@ -89,7 +86,7 @@ decrease in the patient-response metrics.
 \label{fig:rq1-client-usability}
 \end{figure}
 
-The category-level results also differed across forms of resistance. Contesting and controlling had the lowest overall rubric scores, at 2.60 and 2.72, and also had the lowest responsiveness and information-yield scores. Diverting and withholding showed intermediate values. Reframing had the highest rubric average among the resistant categories, at 3.03, together with the lowest activation rate at 0.131 and the highest information-yield score at 4.78.
+The category-level results also differed across forms of resistance. Contesting and controlling had the lowest overall rubric scores, at 2.60 and 2.72, and also had the lowest responsiveness and information-yield scores. Diverting and withholding fell between these categories and reframing. Reframing had the highest rubric average among the resistant categories, at 3.03, together with the lowest activation rate at 0.131 and the highest information-yield score at 4.78.
 
 \begin{table}[t]
 \centering
@@ -110,7 +107,7 @@ Contesting & 2.60 & 0.461 & 3.24 & 3.22 \\
 }
 \end{table}
 
-Across intensity conditions, the rubric average decreased by 0.35 points from the cooperative baseline to high resistance. Over the same comparison, question responsiveness decreased by 1.77 points and information yield by 1.91 points. The category-level results showed the lowest rubric, responsiveness, and information-yield scores for contesting and controlling, while reframing had the highest values among the resistant categories.
+From the cooperative baseline to high resistance, the rubric average decreased by 0.35 points, question responsiveness by 1.77 points, and information yield by 1.91 points. Contesting and controlling had the lowest scores at category level, while reframing had the highest scores among the resistant categories.
 
 \subsection{Diagnostic Quality (RQ2)}
 
@@ -124,9 +121,8 @@ text-match score of 0.96, and a diagnostic-certainty score of 4.24.
 The resistant conditions remained close to the baseline level for classification
 and text matching.
 Classification accuracy was 0.973 for low resistance, 0.980 for medium resistance,
-and 0.957 for high resistance. Text match showed a similar but slightly noisier
-pattern, with scores of 0.950, 0.940, and 0.930 for low, medium, and high
-resistance respectively.
+and 0.957 for high resistance. Text-match accuracy was 0.950, 0.940, and 0.930
+for low, medium, and high resistance respectively.
 
 \begin{table}[t]
 \centering
@@ -156,7 +152,7 @@ intensity.}
 
 Classification confidence stayed high across all
 conditions, decreasing only from 5.00 in the baseline to 4.96 in the
-high-resistance condition. This score describes the evaluator's confidence when assigning a diagnostic category. Diagnostic certainty showed a larger change.
+high-resistance condition. This score measures the evaluator's confidence in its diagnostic classification. Diagnostic certainty changed more.
 Diagnostic certainty decreased from 4.24 in the cooperative baseline to 3.76 in
 the low-resistance condition, 3.69 in the medium-resistance condition, and 3.49
 in the high-resistance condition. This 0.75-point decrease was smaller than the
@@ -212,7 +208,7 @@ Across the main intensity conditions, classification accuracy varied between 0.9
 \subsection{Association Between Conversation and Diagnostic Quality (RQ3)}
 
 RQ3 examines the association between conversation-quality measures and
-diagnostic-quality outcomes. The paired analysis matched the rubric-based and diagnostic evaluation outputs with the patient-response evaluation outputs for all 925 main-experiment conversations. Analyses involving information yield used 923 conversations, because two conversations did not receive a valid information-yield score.
+diagnostic-quality outcomes. For each of the 925 main-experiment conversations, I combined the rubric, diagnostic, and patient-response evaluation results. Analyses involving information yield used 923 conversations because two did not receive a valid score.
 
 Table~\ref{tab:rq3-correlations} reports selected Pearson correlations. Overall
 information yield was correlated with the rubric average
@@ -248,8 +244,8 @@ Question responsiveness & Diagnostic certainty & 0.22 \\
 }
 \end{table}
 
-Table~\ref{tab:rq3-yield-quartiles} presents the same comparison after grouping
-evaluated conversations with valid information-yield scores into information-yield quartiles. The lowest
+Table~\ref{tab:rq3-yield-quartiles} groups the 923 conversations with valid
+information-yield scores into four quartiles. The lowest
 information-yield quartile had a mean classification accuracy of 0.948 and a mean
 diagnostic certainty score of 3.37. The highest information-yield quartile had a
 mean classification accuracy of 0.982 and a mean diagnostic-certainty score of
@@ -278,8 +274,8 @@ The association between conversation quality and diagnostic accuracy was weak in
 
 \subsection{Conversation Characteristics (RQ4)}
 
-RQ4 examines how resistance changes observable characteristics of the patient
-responses. Table~\ref{tab:rq4-intensity} reports answer length, short-answer
+RQ4 examines how resistance changes features of the patient responses.
+Table~\ref{tab:rq4-intensity} reports answer length, short-answer
 rate, nonresponse rate, question responsiveness, and information yield across
 the four conditions.
 
@@ -308,10 +304,10 @@ High & 35.94 & 5.5 & 3.4 & 3.21 & 3.06 \\
 }
 \end{table}
 
-The response characteristics differed substantially across resistance
-categories (Table~\ref{tab:rq4-category}). Withholding produced the shortest
-answers, with a mean of 18.18 words, and was the only category with substantial
-short-answer and nonresponse rates. Diverting produced the longest answers, at
+The response characteristics also differed across resistance categories
+(Table~\ref{tab:rq4-category}). Withholding produced the shortest answers,
+with a mean of 18.18 words, and was the only category with high short-answer
+and nonresponse rates. Diverting produced the longest answers, at
 58.44 words on average. However, its mean responsiveness and information yield
 were 3.70 and 3.71, compared with 4.96 and 4.78 for reframing. Controlling and
 contesting produced answers of similar length to the cooperative baseline but
@@ -336,22 +332,20 @@ Contesting & 30.22 & 0.0 & 0.0 & 3.24 & 3.22 \\
 }
 \end{table}
 
-The subcategory-level extremes clarify these category averages. Silence or
+The individual subcategories explain these category averages. Silence or
 nonresponse had a mean answer length of 16.94 words, a short-answer rate of
 36.9\%, and a nonresponse rate of 23.9\%. Vague or minimal information had a
 similarly low mean length of 19.43 words but a nonresponse rate of 0.0\%.
 Irrelevant verbosity had the largest mean answer length, at 83.94 words, while
-its information-yield score was 4.03. Thus, the increase in mean answer length
-at higher intensity did not correspond to an increase in clinically usable
-information.
+its information-yield score was 4.03. Longer answers therefore did not always
+provide more clinically useful information.
 
 \subsection{Exploratory Forced-Resistance Stress Test}
 
-The separate 60-conversation stress test examined the diagnostic pipeline when
-resistance was activated on every questionnaire turn, except for the three
-truth-map-dependent reframing subcategories. Table~\ref{tab:stress-comparison}
-compares this dataset with the high-intensity condition from the main
-experiment.
+The stress test contained 60 conversations. Resistance was activated on every
+questionnaire turn, except for the three reframing subcategories that use the
+truth map. Table~\ref{tab:stress-comparison} compares the stress test with the
+main high-intensity condition.
 
 Classification accuracy decreased from 0.957 in the main high-intensity
 condition to 0.567 in the stress test, while text-match accuracy decreased from
@@ -383,18 +377,18 @@ Diagnostic certainty & 3.493 & 3.150 \\
 
 The category-level classification accuracy was 0.30 for contesting, 0.40 for
 controlling, 0.40 for withholding, and 0.60 for diverting. These four categories
-were activated on every questionnaire turn. Reframing retained its truth-map
-restriction, resulting in an observed activation rate of 0.278 and a
-classification accuracy of 1.00. The reframing result is therefore based on a
-different activation pattern from the other stress-test categories.
+were activated on every questionnaire turn. Reframing was still limited by the
+truth map. Its observed activation rate was 0.278 and its classification
+accuracy was 1.00. Its activation pattern therefore differed from the other
+stress-test categories.
 
-Incorrectly classified stress-test reports still received a mean classification
-confidence score of 4.58 and a mean diagnostic-justification score of 4.15. For
-correctly classified reports, the corresponding means were 4.91 and 4.03.
-A manual inspection also identified reports that treated questionnaire wording
-as patient-endorsed evidence. In one PTSD conversation using silence or
+Incorrectly classified stress-test reports received a mean classification
+confidence score of 4.58 and a mean diagnostic-justification score of 4.15. The
+scores for correctly classified reports were 4.91 and 4.03. Manual review also
+found reports that treated question wording as if the patient had endorsed it.
+In one PTSD conversation using silence or
 nonresponse, the patient answers after the opening consisted only of brief
-hesitations, actions, and silence. The resulting report nevertheless described
+hesitations, actions, and silence. Even so, the report described
 depression, mania, auditory hallucinations, substance misuse, and suicidal
 ideation, and assigned a provisional diagnosis of schizoaffective disorder.
 
