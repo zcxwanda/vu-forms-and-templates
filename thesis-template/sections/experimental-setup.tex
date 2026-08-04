@@ -13,9 +13,6 @@ What is the association between conversation quality and diagnostic quality?
 \parab{RQ4: Conversation characteristics.}
 How does the presence of profile-based resistant clients influence conversation characteristics? Additionally, how do conversation characteristics vary across different resistance categories?
 
-RQ1 evaluates the quality and clinical usefulness of the generated conversations, while RQ2 evaluates the resulting diagnostic outputs. RQ3 examines the association between these two aspects. RQ4 describes how resistant-client conditions change observable properties of the patient responses and whether the intended resistance is realized in the generated dialogue.
-
-
 \subsection{Materials}
 
 \paragraph{Assessment Questionnaire.}
@@ -105,7 +102,7 @@ Behavioral characteristics are calculated directly from the patient responses. T
 
 
 \subsection{Implementation Details}
-Gemini 2.5 Flash is used for the assistant, patient, and diagnostic agents in all conversation-generation conditions. It is also used for the rubric-based, diagnostic, and patient-response LLM evaluations. Using the same model across the cooperative and resistant conditions keeps the model fixed while the client condition changes. The exploratory stress-test conversations are generated with a separate script and are kept separate from the main experimental dataset.
+Gemini 2.5 Flash is used for the assistant, patient, and diagnostic agents in all conversation-generation conditions. It is also used for the rubric-based, diagnostic, and patient-response LLM evaluations. The same model is used across all experimental conditions, so the cooperative and resistant runs do not differ in model choice. The exploratory stress-test conversations are generated with a separate script and are kept separate from the main experimental dataset.
 
 %%% Local Variables:
 %%% mode: latex

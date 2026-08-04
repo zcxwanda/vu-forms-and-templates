@@ -9,9 +9,9 @@ quality, and descriptive conversation characteristics.
 
 \subsection{Resistance Manipulation Check}
 
-Before reporting the evaluation results, I first checked whether the generated patient behaviour reflected the intended resistance condition. The experiment depends on the patient agent producing the assigned resistance subcategory on activated turns.
+Before reporting the evaluation results, I first checked whether the generated patient behavior reflected the intended resistance condition. The experiment depends on the patient agent producing the assigned resistance subcategory on activated turns.
 
-Resistance-fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. Fidelity therefore changed little across intensities.
+Resistance fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. Fidelity therefore changed little across intensities.
 
 The activation rate increased with the intended intensity. Low-intensity conversations had resistance in 17.0\% of patient turns, medium-intensity conversations in 36.9\%, and high-intensity conversations in 59.4\%.
 
@@ -107,8 +107,6 @@ Contesting & 2.60 & 0.461 & 3.24 & 3.22 \\
 }
 \end{table}
 
-From the cooperative baseline to high resistance, the rubric average decreased by 0.35 points, question responsiveness by 1.77 points, and information yield by 1.91 points. Contesting and controlling had the lowest scores at category level, while reframing had the highest scores among the resistant categories.
-
 \subsection{Diagnostic Quality (RQ2)}
 
 RQ2 asks whether profile-based resistant clients influence diagnostic quality,
@@ -202,9 +200,6 @@ Contesting & 0.940 & 0.913 & 4.96 & 3.57 \\
 \label{fig:rq2-diagnostic-certainty}
 \end{figure}
 
-Across the main intensity conditions, classification accuracy varied between 0.957 and 0.980, compared with 1.000 in the cooperative baseline. Diagnostic certainty decreased from 4.24 in the baseline to 3.49 under high resistance, while diagnostic justification decreased from 4.71 to 4.39. At category level, contesting had the lowest classification accuracy, whereas controlling and withholding had the lowest diagnostic-certainty scores.
-
-
 \subsection{Association Between Conversation and Diagnostic Quality (RQ3)}
 
 RQ3 examines the association between conversation-quality measures and
@@ -270,7 +265,7 @@ Q4 highest & 226 & 4.88 & 0.982 & 3.88 \\
 }
 \end{table}
 
-The association between conversation quality and diagnostic accuracy was weak in the main experiment. Information yield and question responsiveness had larger positive correlations with diagnostic certainty than with classification or text-match accuracy.
+Information yield and question responsiveness were more closely associated with diagnostic certainty than with classification or text-match accuracy.
 
 \subsection{Conversation Characteristics (RQ4)}
 
@@ -363,18 +358,21 @@ The stress test contained 60 conversations. Resistance was activated on every
 questionnaire turn, except for the three reframing subcategories that use the
 truth map. Figure~\ref{fig:stress-comparison} compares the stress test with the
 main high-intensity condition.
+Because the stress test contains one run per profile--subcategory combination
+and uses a different activation rule, the comparison is reported descriptively
+rather than treated as a fourth intensity condition.
 
 Classification accuracy decreased from 0.957 in the main high-intensity
 condition to 0.567 in the stress test, while text-match accuracy decreased from
 0.930 to 0.667. Question responsiveness decreased from 3.21 to 2.43 and
 information yield from 3.06 to 2.34. The changes in the diagnostic text were
 smaller: classification confidence decreased from 4.96 to 4.77, diagnostic
-justification from 4.39 to 4.09, and diagnostic certainty from 3.49 to 3.15.
+justification from 4.39 to 4.08, and diagnostic certainty from 3.49 to 3.15.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figs/results/stress_test_comparison.png}
-\caption{Comparison of the main high-intensity condition and the forced-resistance stress test. Accuracy measures use a 0--1 scale; the remaining measures use five-point scales.}
+\caption{Comparison of the main high-intensity condition ($n=300$) and the forced-resistance stress test ($n=60$). Accuracy measures use a 0--1 scale; the remaining measures use five-point scales. The stress-test diagnostic-justification mean is based on 59 available scores; the other stress-test measures use all 60 conversations.}
 \label{fig:stress-comparison}
 \end{figure*}
 
@@ -404,12 +402,12 @@ report.
 ]
 \small
 \textit{[... earlier questionnaire turns omitted ...]}\\
-\textbf{Assistant:} Hearing things other people could not hear, such as voices
+\textbf{Assistant:} Hearing things other people couldn't hear, such as voices
 when no one is around?\\
 \textbf{Patient:} \texttt{[looks down]}\\
 \textit{[... remaining questionnaire turns omitted ...]}\\
 \textbf{Diagnostic report:} ``Crucially, the patient reported auditory
-hallucinations (hearing things other people could not hear, such as voices when
+hallucinations (hearing things other people couldn't hear, such as voices when
 no one is around).''
 \end{tcolorbox}
 

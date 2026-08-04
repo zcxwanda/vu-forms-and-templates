@@ -1,36 +1,34 @@
 \section{Background}\label{s:background}
 
-This section introduces the methodological context needed to understand the experimental setup. I first describe DSM5AgentFlow and the roles of its agents. I then explain the role of clinical profiles in simulated patient generation and define client resistance as it is used in this thesis.
+DSM5AgentFlow provides the base workflow for this study. This section describes its agents, the clinical profiles used to simulate patients, and the resistance taxonomy used in the experiments.
 
 \subsection{DSM5AgentFlow and Agents}
 
-DSM5AgentFlow is a multi-agent LLM workflow for questionnaire-based mental health assessment and explainable mental disorder diagnosis~\cite{ozgun2025trustworthyaipsychotherapymultiagent}. In the original system, the assessment process is divided across multiple agents. A patient agent generates responses according to a clinical profile, an assistant agent conducts the assessment, and a diagnostic component produces a final diagnostic output after the dialogue.
+DSM5AgentFlow is a multi-agent LLM workflow for questionnaire-based mental health assessment and explainable mental disorder diagnosis~\cite{ozgun2025trustworthyaipsychotherapymultiagent}. In this system, a patient agent generates responses from a clinical profile, an assistant agent conducts the assessment, and a diagnostic agent produces a final diagnostic report from the completed dialogue.
 
-This structure is useful for this thesis because it provides a controlled setting for simulated diagnostic dialogue generation. The assistant agent follows a questionnaire-driven assessment flow, while the patient agent provides the symptom information used by the later diagnostic process. As a result, the generated dialogue depends not only on the questionnaire structure, but also on how the patient agent responds to each assessment item.
+For this thesis, the workflow provides a controlled setting in which the questionnaire and clinical profile remain unchanged while the patient agent's response behavior is varied. Cooperative and resistant conditions can therefore be compared under the same assessment structure.
 
-The original setting mainly assumes a cooperative simulated patient. The patient agent is expected to answer the assistant's questions and provide information according to the assigned clinical profile. This cooperative assumption makes it possible to generate baseline diagnostic dialogues, but it does not directly test how the system behaves when the client is vague, avoidant, challenging, or otherwise difficult to assess.
+The original setting assumes a cooperative simulated patient. The patient agent answers the assistant's questions and provides information according to the assigned clinical profile. This produces useful baseline dialogues but does not show how the system behaves when the client is vague, avoidant, challenging, or otherwise difficult to assess.
 
 
 \subsection{Clinical Profiles and Profile Grounding}
 
 In DSM5AgentFlow, simulated patients are generated from clinical profiles. A clinical profile specifies the target disorder, relevant symptoms, and sometimes the response style of the simulated client. In this thesis, the clinical profile serves as the grounding source for patient generation: clinically meaningful answers should remain consistent with the assigned profile.
 
-This grounding requirement is important because the generated dialogue is later used for diagnostic evaluation. If the patient agent introduces symptoms that are not supported by the clinical profile, the diagnostic component may base its output on information that does not match the intended case. This can make the conversation harder to interpret and may confound the evaluation of diagnostic quality. This grounding problem is especially relevant for resistance behaviors that reframe or deny symptoms. For this reason, the resistant-client generation method introduced in Section~\ref{s:methodology} includes additional grounding controls for these cases.
+Because the diagnostic agent uses the generated dialogue as evidence, symptoms that are not supported by the clinical profile may change the resulting diagnosis. Such additions would also make it difficult to determine whether an observed effect was caused by resistance or by changes to the clinical case. This issue is particularly relevant to resistance that denies or reframes symptoms. Section~\ref{s:methodology} describes the grounding controls used for these subcategories.
 
 
 \subsection{Client Resistance}
 
-In this thesis, client resistance refers to client responses that reduce cooperation with a questionnaire-based diagnostic assessment. Such responses may make the answer less useful, less relevant, or harder to interpret. They may also disrupt the assessment process by challenging, blocking, redirecting, or trying to control the interaction.
-
-This definition is intentionally experiment-oriented. The goal is not to provide a complete clinical theory of resistance, nor to discuss why a real client might resist. Instead, resistance is operationalized as a set of observable response patterns that can be added to simulated patient profiles. This allows different resistant-client conditions to be generated and compared under controlled experimental settings.
+In this thesis, resistance is defined through patterns in the patient's answers. The taxonomy describes what the patient does during the conversation, such as withholding information or challenging the assessment. It does not attempt to explain why a real client might show the same behavior.
 
 \subsection{Resistance Dimensions and Categories}
 
-The resistance taxonomy used in this thesis distinguishes between two broad dimensions: content-dimension resistance and interaction-dimension resistance. Content-dimension resistance affects the information provided in response to the current questionnaire item. Examples include vague or minimal answers, silence, topic shifting, irrelevant verbosity, minimization, externalization, and denial. These behaviors mainly influence how much usable symptom information is available to the assistant and diagnostic component.
+The resistance taxonomy used in this thesis distinguishes between two broad dimensions: content-dimension resistance and interaction-dimension resistance. Content-dimension resistance affects the information provided in response to the current questionnaire item. Examples include vague or minimal answers, silence, topic shifting, irrelevant verbosity, minimization, externalization, and denial. These behaviors mainly influence how much usable symptom information is available to the assistant and diagnostic agent.
 
 Interaction-dimension resistance affects the assessment process itself. Examples include challenging the assessment, hostile criticism, topic blocking, agenda redirection, and demanding an immediate diagnosis. These behaviors may not only reduce the information available in a particular answer, but also interfere with the questionnaire-driven structure of the dialogue.
 
-This distinction is useful because different forms of resistance may affect the system in different ways. Content-dimension resistance primarily changes the completeness and interpretability of client-provided information, while interaction-dimension resistance can also challenge the flow and control of the assessment process. Table~\ref{tab:resistance-summary} summarizes the resistance dimensions and categories used in the experiments. The full taxonomy, including terminology, category definitions, subcategory examples, and boundary rules, is provided in Appendix~\ref{s:appendix-taxonomy}. 
+Content-dimension resistance changes the completeness and interpretability of client-provided information. Interaction-dimension resistance can additionally disrupt the flow and control of the assessment process. Table~\ref{tab:resistance-summary} summarizes the dimensions and categories used in the experiments. The full taxonomy, including terminology, category definitions, subcategory examples, and boundary rules, is provided in Appendix~\ref{s:appendix-taxonomy}.
 
 \begin{table}[tb]
     \centering

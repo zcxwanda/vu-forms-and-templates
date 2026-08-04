@@ -30,11 +30,11 @@ This appendix provides the full resistance taxonomy used for constructing resist
         Resistance category &
         A resistance category is a group of related resistant responses within a resistance dimension. Categories describe the main form of resistance, such as withholding information, diverting from the question, reframing symptoms, contesting the assessment, or controlling the process. \\
 
-        Resistance sub-category &
-        A resistance sub-category is a more specific form of resistance within a category. Sub-categories describe concrete response types used for resistance profile construction, simulation design, and qualitative interpretation. \\
+        Resistance subcategory &
+        A resistance subcategory is a more specific form of resistance within a category. Subcategories describe concrete response types used for resistance profile construction, simulation design, and qualitative interpretation. \\
 
         Resistance intensity &
-        Resistance intensity describes how often resistance appears in the simulated client's responses. It is an experimental condition rather than a taxonomy category. \\
+        Resistance intensity primarily describes how frequently resistance appears in the simulated client's responses. It also slightly changes the sampling of expression levels on activated turns. It is an experimental condition rather than a taxonomy category. \\
 
         \bottomrule
     \end{tabular}
@@ -85,7 +85,7 @@ This appendix provides the full resistance taxonomy used for constructing resist
     \label{tab:content-resistance-subcategories}
     \begin{tabular}{p{0.15\linewidth}p{0.19\linewidth}p{0.25\linewidth}p{0.17\linewidth}p{0.20\linewidth}}
         \toprule
-        \thead{Category} & \thead{Sub-category} & \thead{Definition} & \thead{Example} & \thead{Boundary rule} \\
+        \thead{Category} & \thead{Subcategory} & \thead{Definition} & \thead{Example} & \thead{Boundary rule} \\
         \midrule
 
         Withholding &
@@ -140,7 +140,7 @@ This appendix provides the full resistance taxonomy used for constructing resist
     \label{tab:interaction-resistance-subcategories}
     \begin{tabular}{p{0.15\linewidth}p{0.19\linewidth}p{0.25\linewidth}p{0.17\linewidth}p{0.20\linewidth}}
         \toprule
-        \thead{Category} & \thead{Sub-category} & \thead{Definition} & \thead{Example} & \thead{Boundary rule} \\
+        \thead{Category} & \thead{Subcategory} & \thead{Definition} & \thead{Example} & \thead{Boundary rule} \\
         \midrule
 
         Contesting &
@@ -186,7 +186,7 @@ This appendix summarizes the implementation materials used to generate the resis
 
 \subsection{Resistance Prompt Templates}
 
-Each resistant-client run uses one resistance sub-category. The prompt files follow the same general structure: they define the target behavior, give generation rules, add boundary rules to avoid overlap with nearby categories, and specify how the behavior should vary across expression levels. Table~\ref{tab:prompt-template-example} shows a shortened example based on the vague/minimal information prompt.
+Each resistant-client run uses one resistance subcategory. The prompt files follow the same general structure: they define the target behavior, give generation rules, add boundary rules to avoid overlap with nearby categories, and specify how the behavior should vary across expression levels. Table~\ref{tab:prompt-template-example} shows a shortened example based on the vague/minimal information prompt.
 
 \begin{table*}[tb]
     \centering
@@ -214,7 +214,7 @@ Each resistant-client run uses one resistance sub-category. The prompt files fol
 
 \subsection{Truth Map Table}
 
-Truth maps are used only for reframing sub-categories. They mark whether each questionnaire item is positive, negative, or unknown for a clinical profile. The generation code uses the positive items as eligible targets for minimization, externalization, and denial. Table~\ref{tab:truth-map-positive} shows the profile-positive questionnaire items used in the current experiment.
+Truth maps are used only for reframing subcategories. They mark whether each questionnaire item is positive, negative, or unknown for a clinical profile. The generation code uses the positive items as eligible targets for minimization, externalization, and denial. Table~\ref{tab:truth-map-positive} shows the profile-positive questionnaire items used in the current experiment.
 
 \begin{table*}[tb]
     \centering
@@ -236,25 +236,25 @@ Truth maps are used only for reframing sub-categories. They mark whether each qu
 
 \subsection{Activation Settings}
 
-Resistance intensity controls the expected frequency of activated resistance turns. When a turn is activated, an expression level is also sampled. Expression level changes how strongly the selected sub-category appears in that response, but it is not treated as a separate experimental condition. The main settings used in the current implementation are shown in Table~\ref{tab:activation-settings}.
+Resistance intensity controls the expected frequency of activated resistance turns. When a turn is activated, an expression level is also sampled. Expression level changes how strongly the selected subcategory appears in that response, but it is not treated as a separate experimental condition. The main settings used in the current implementation are shown in Table~\ref{tab:activation-settings}.
 
 \begin{table*}[tb]
     \centering
     \small
-    \tabcap{Turn-level activation and expression settings.}
+    \tabcap{Turn-level activation, expression, and cooldown settings.}
     \label{tab:activation-settings}
-    \begin{tabular}{p{0.18\linewidth}p{0.30\linewidth}p{0.40\linewidth}}
+    \begin{tabular}{p{0.10\linewidth}p{0.18\linewidth}p{0.30\linewidth}p{0.14\linewidth}p{0.14\linewidth}}
         \toprule
-        \thead{Intensity} & \thead{Target activation range} & \thead{Expression-level probabilities} \\
+        \thead{Intensity} & \thead{Target activation range} & \thead{Expression-level probabilities} & \thead{After one activation} & \thead{Additional factor after two} \\
         \midrule
-        Low & 0.15--0.30 & Level 1: 0.44; Level 2: 0.28; Level 3: 0.28 \\
-        Medium & 0.40--0.60 & Level 1: 0.28; Level 2: 0.44; Level 3: 0.28 \\
-        High & 0.70--0.85 & Level 1: 0.28; Level 2: 0.28; Level 3: 0.44 \\
+        Low & 0.15--0.30 & Level 1: 0.44; Level 2: 0.28; Level 3: 0.28 & 0.50 & 0.15 \\
+        Medium & 0.40--0.60 & Level 1: 0.28; Level 2: 0.44; Level 3: 0.28 & 0.75 & 0.40 \\
+        High & 0.70--0.85 & Level 1: 0.28; Level 2: 0.28; Level 3: 0.44 & 0.95 & 0.85 \\
         \bottomrule
     \end{tabular}
 \end{table*}
 
-For non-reframing categories, activation can be considered on every ordinary patient-answer turn. For reframing categories, activation is limited by the truth map. This means that a high-intensity reframing run can still have fewer activated turns than a high-intensity non-reframing run if the clinical profile has fewer positive questionnaire items. A cooldown rule is also used to reduce unnatural back-to-back activations, so the observed activation rate may not exactly match the sampled target rate in every conversation.
+For non-reframing categories, activation can be considered on every ordinary patient-answer turn. For reframing categories, activation is limited by the truth map. This means that a high-intensity reframing run can still have fewer activated turns than a high-intensity non-reframing run if the clinical profile has fewer positive questionnaire items. The last two columns give the cooldown multipliers applied after one or two consecutive activations; after two consecutive activations, both factors are applied. The observed activation rate may therefore differ from the sampled target rate in an individual conversation.
 
 \subsection{Example Conversation Excerpts}
 
@@ -267,7 +267,7 @@ Table~\ref{tab:example-excerpts} gives shortened representative excerpts from ge
     \label{tab:example-excerpts}
     \begin{tabular}{p{0.20\linewidth}p{0.30\linewidth}p{0.40\linewidth}}
         \toprule
-        \thead{Sub-category} & \thead{Assistant question} & \thead{Patient response excerpt} \\
+        \thead{Subcategory} & \thead{Assistant question} & \thead{Patient response excerpt} \\
         \midrule
         Vague/minimal information & How has this affected your work and daily responsibilities? & ``It is just harder to get things done, I guess.'' \\
         Silence/nonresponse & How long have you been feeling this way? & ``I...'' / \texttt{[silence]} \\
