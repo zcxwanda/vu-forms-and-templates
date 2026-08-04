@@ -361,7 +361,7 @@ Irrelevant verbosity & 83.94 & 0.0 & 0.0 & 4.03 \\
 
 The stress test contained 60 conversations. Resistance was activated on every
 questionnaire turn, except for the three reframing subcategories that use the
-truth map. Table~\ref{tab:stress-comparison} compares the stress test with the
+truth map. Figure~\ref{fig:stress-comparison} compares the stress test with the
 main high-intensity condition.
 
 Classification accuracy decreased from 0.957 in the main high-intensity
@@ -371,26 +371,12 @@ information yield from 3.06 to 2.34. The changes in the diagnostic text were
 smaller: classification confidence decreased from 4.96 to 4.77, diagnostic
 justification from 4.39 to 4.09, and diagnostic certainty from 3.49 to 3.15.
 
-\begin{table}[t]
+\begin{figure*}[t]
 \centering
-\caption{Main high-intensity and forced-resistance stress-test results.}
-\label{tab:stress-comparison}
-\resizebox{\linewidth}{!}{%
-\begin{tabular}{lrr}
-\toprule
-Measure & Main high intensity & Stress test \\
-\midrule
-Classification accuracy & 0.957 & 0.567 \\
-Text-match accuracy & 0.930 & 0.667 \\
-Question responsiveness & 3.209 & 2.434 \\
-Information yield & 3.058 & 2.341 \\
-Classification confidence & 4.960 & 4.767 \\
-Diagnostic justification & 4.393 & 4.085 \\
-Diagnostic certainty & 3.493 & 3.150 \\
-\bottomrule
-\end{tabular}
-}
-\end{table}
+\includegraphics[width=0.92\textwidth]{figs/results/stress_test_comparison.png}
+\caption{Comparison of the main high-intensity condition and the forced-resistance stress test. Accuracy measures use a 0--1 scale; the remaining measures use five-point scales.}
+\label{fig:stress-comparison}
+\end{figure*}
 
 The category-level classification accuracy was 0.30 for contesting, 0.40 for
 controlling, 0.40 for withholding, and 0.60 for diverting. These four categories
@@ -403,11 +389,38 @@ Incorrectly classified stress-test reports received a mean classification
 confidence score of 4.58 and a mean diagnostic-justification score of 4.15. The
 scores for correctly classified reports were 4.91 and 4.03. Manual review also
 found reports that treated question wording as if the patient had endorsed it.
-In one PTSD conversation using silence or
-nonresponse, the patient answers after the opening consisted only of brief
-hesitations, actions, and silence. Even so, the report described
-depression, mania, auditory hallucinations, substance misuse, and suicidal
-ideation, and assigned a provisional diagnosis of schizoaffective disorder.
+In one PTSD conversation using silence or nonresponse, the patient answers
+after the opening consisted only of brief hesitations, actions, and silence.
+The following exchange shows how one unanswered question was used in the final
+report.
+
+\begin{tcolorbox}[
+    colback=gray!5,
+    colframe=gray!55,
+    boxrule=0.5pt,
+    arc=1mm,
+    title={Example: question wording treated as evidence},
+    fonttitle=\bfseries
+]
+\small
+\textbf{Assistant:} Hearing things other people could not hear, such as voices
+when no one is around?\\
+\textbf{Patient:} \texttt{[looks down]}\\
+\textbf{Diagnostic report:} The patient reported ``auditory hallucinations''
+and used the wording of the question as supporting evidence.
+\end{tcolorbox}
+
+The same report also described depression, mania, substance misuse, and
+suicidal ideation, and assigned a provisional diagnosis of schizoaffective
+disorder. Other error patterns also appeared. In one depression conversation,
+repeated demands for an immediate diagnosis were classified as health-related
+anxiety, even though the report noted that the patient had not answered the
+questionnaire items. In one anxiety conversation, hostile criticism and
+fidgeting were treated as evidence of mania, leading to a provisional bipolar
+diagnosis. In one PTSD conversation, irrelevant details about routines and
+daily tasks were treated as signs of anxiety and rigidity, leading to a
+provisional diagnosis of generalized anxiety disorder with
+obsessive-compulsive personality traits.
 
 %%% Local Variables:
 %%% mode: latex
