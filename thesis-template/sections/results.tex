@@ -9,16 +9,15 @@ quality, and descriptive conversation characteristics.
 
 \subsection{Resistance Manipulation Check}
 
-Before interpreting the downstream evaluation scores, I first checked whether the generated patient behaviour reflected the intended resistance condition. This check is important because the experiment depends on the patient agent actually producing resistance when a resistant profile is activated.
+Before reporting the evaluation results, I first checked whether the generated patient behaviour reflected the intended resistance condition. The experiment depends on the patient agent producing the assigned resistance subcategory on activated turns.
 
-The post-hoc resistance-fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. This suggests that the generated resistant turns usually matched the intended resistance subcategory rather than drifting into an unrelated subcategory.
+Resistance-fidelity scores were high across all three intensity conditions. On a five-point scale, the mean fidelity score was 4.90 for low intensity, 4.89 for medium intensity, and 4.91 for high intensity. The small difference across intensities indicates that fidelity remained stable while activation frequency changed.
 
-The activation rate also increased with the intended intensity. Low-intensity conversations had resistance in 17.0\% of patient turns, medium-intensity conversations had resistance in 36.9\% of patient turns, and high-intensity conversations had resistance in 59.4\% of patient turns. This shows that the intensity mechanism successfully changed how often resistance appeared in the
-conversation.
+The activation rate increased with the intended intensity. Low-intensity conversations had resistance in 17.0\% of patient turns, medium-intensity conversations in 36.9\%, and high-intensity conversations in 59.4\%.
 
 \begin{table}[t]
 \centering
-\caption{Resistance activation rates by intensity and category, with fidelity and information yield.}
+\caption{Activation rates across resistance categories, with mean resistance fidelity and information yield, by intensity.}
 \label{tab:manipulation-check}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrrrrrr}
@@ -35,23 +34,23 @@ High & 0.594 & 0.724 & 0.202 & 0.720 & 0.720 & 0.739 & 4.91 & 3.06 \\
 }
 \end{table}
 
-The lower activation rate for reframing categories is expected. These categories use the truth map and are only activated when the questionnaire item asks about a
+Reframing had a lower activation rate because these categories use the truth map and are only activated when the questionnaire item asks about a
 symptom that is present in the clinical profile. In contrast, withholding, diverting, controlling, and contesting resistance can be expressed on a larger number of questionnaire items, so their activation rates are closer to the target range for each intensity condition.
 
-The manipulation check also shows that increasing resistance intensity reduced the amount of usable information available in the dialogue. The overall
+Increasing resistance intensity was also accompanied by a reduction in usable information. The overall
 information-yield score decreased from 4.43 in the low-intensity condition to 3.80 in the medium-intensity condition and 3.06 in the high-intensity condition.
-This pattern supports the basic assumption of the experiment: stronger resistance does not only change the surface style of patient responses, but also changes how much clinically useful information the conversation provides.
+Thus, higher observed activation rates occurred together with lower information-yield scores.
 
 \subsection{Conversation Quality (RQ1)}
 
-RQ1 asks whether profile-based resistant clients influence overall conversation quality, and whether this influence differs across resistance categories. The results show a clear decrease in conversation quality as resistance becomes more frequent and more difficult to manage.
+RQ1 asks whether profile-based resistant clients influence overall conversation quality, and whether this influence differs across resistance categories. The conversation-quality measures generally decreased as resistance intensity increased.
 
-Using the original DSM5AgentFlow conversation-quality rubrics, the cooperative baseline received the highest overall rubric score, with a mean score of 3.04. The low-resistance condition was slightly lower at 2.90, the medium-resistance condition was 2.85, and the high-resistance condition was 2.69. The decrease is not large on every original rubric, but it is consistent with the expected direction. The largest changes are visible in DSM coverage, consistency, and empathy. For example, consistency decreased from 1.96 in the baseline to 1.39 in
+Using the conversation-quality rubrics adopted from DSM5AgentFlow, the cooperative baseline received a mean rubric score of 3.04. The mean was 2.90 for low resistance, 2.85 for medium resistance, and 2.69 for high resistance. The individual rubric components did not change uniformly. The largest differences between the baseline and high-resistance conditions were visible in DSM coverage, consistency, and empathy. For example, consistency decreased from 1.96 in the baseline to 1.39 in
 the high-resistance condition, and empathy decreased from 2.04 to 1.50. Table~\ref{tab:rq1-intensity} gives the corresponding values, and Figure~\ref{fig:rq1-rubric-components} visualizes the same pattern across the individual rubric components.
 
 \begin{table}[t]
 \centering
-\caption{Conversation-quality scores by resistance intensity.}
+\caption{Conversation-quality and patient-response scores by resistance intensity.}
 \label{tab:rq1-intensity}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrrrrr}
@@ -67,38 +66,34 @@ High & 2.69 & 2.02 & 4.38 & 1.39 & 1.50 & 3.21 & 3.06 \\
 }
 \end{table}
 
-The client-side post-hoc metrics show the effect more directly. The cooperative
+The patient-response metrics show a larger change. The cooperative
 baseline was close to the ceiling, with a mean question-responsiveness score of
 4.98 and a mean information-yield score of 4.97. These scores decreased as
 resistance intensity increased: question responsiveness decreased to 4.53, 3.92,
 and 3.21 for the low-, medium-, and high-resistance conditions respectively.
 Overall information yield showed the same pattern, decreasing to 4.43, 3.80,
-and 3.06. This means that stronger resistance did not only change the tone of
-the conversation; it also made patient answers less directly responsive and less
-clinically useful. Figure~\ref{fig:rq1-client-usability} shows this monotonic
-decrease in the client-side metrics.
+and 3.06. Figure~\ref{fig:rq1-client-usability} shows this monotonic
+decrease in the patient-response metrics.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/results/rq1_rubric_components_by_intensity.png}
-\caption{Original DSM5AgentFlow conversation-quality rubric components by
-condition.}
+\caption{Conversation-quality rubric components by resistance intensity.}
 \label{fig:rq1-rubric-components}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/results/rq1_client_usability_by_intensity.png}
-\caption{Client-side responsiveness and information-yield scores by resistance
-intensity.}
+\caption{Question responsiveness and information-yield scores by resistance intensity.}
 \label{fig:rq1-client-usability}
 \end{figure}
 
-The category-level results show that different forms of resistance affected conversation quality in different ways. Contesting and controlling resistance had the lowest overall rubric scores, with mean scores of 2.60 and 2.72. These categories also had low post-hoc responsiveness and information-yield scores, which suggests that argumentative or agenda-controlling clients make the assessment interaction less productive. Diverting and withholding resistance showed intermediate effects. Reframing had the highest overall rubric score among the resistant categories, at 3.03, and also had the highest overall information yield. This is partly because reframing was activated less often due to the truth-map eligibility rule, and partly because reframing responses often still contain some clinically relevant information even when the client minimizes, denies, or externalizes symptoms.
+The category-level results also differed across forms of resistance. Contesting and controlling had the lowest overall rubric scores, at 2.60 and 2.72, and also had the lowest responsiveness and information-yield scores. Diverting and withholding showed intermediate values. Reframing had the highest rubric average among the resistant categories, at 3.03, together with the lowest activation rate at 0.131 and the highest information-yield score at 4.78.
 
 \begin{table}[t]
 \centering
-\caption{Conversation-quality scores by resistance category.}
+\caption{Conversation-quality, activation, and patient-response measures by resistance category.}
 \label{tab:rq1-category}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrr}
@@ -115,27 +110,23 @@ Contesting & 2.60 & 0.461 & 3.24 & 3.22 \\
 }
 \end{table}
 
-Overall, RQ1 is supported: resistant-client simulation reduced conversation quality, especially when resistance was more frequent and when the resistance category directly interrupted the assessment structure. However, the effect was stronger in the client-side metrics than in the original DSM5AgentFlow rubrics. This suggests that the original evaluator captures some degradation in the conversation, but it is not fully sensitive to client-side resistance behaviours such as withholding information, redirecting the conversation, or challenging the assessment.
+Across intensity conditions, the rubric average decreased by 0.35 points from the cooperative baseline to high resistance. Over the same comparison, question responsiveness decreased by 1.77 points and information yield by 1.91 points. The category-level results showed the lowest rubric, responsiveness, and information-yield scores for contesting and controlling, while reframing had the highest values among the resistant categories.
 
 \subsection{Diagnostic Quality (RQ2)}
 
 RQ2 asks whether profile-based resistant clients influence diagnostic quality,
-and whether this influence differs across resistance categories. Compared with
-conversation quality, the diagnostic results were more stable. Resistant-client
-simulation did not cause a large collapse in diagnostic performance, although
-some decline is visible under high-intensity resistance and in specific
-resistance categories.
+and whether this influence differs across resistance categories. Classification
+and text-match accuracy remained above 0.93 in all main experimental conditions,
+while diagnostic certainty decreased as resistance intensity increased.
 
-The cooperative baseline reached a classification match score of 1.00, a
-text-match score of 0.96, and a post-hoc diagnostic-certainty score of 4.24.
+The cooperative baseline reached a classification accuracy of 1.00, a
+text-match score of 0.96, and a diagnostic-certainty score of 4.24.
 The resistant conditions remained close to the baseline level for classification
 and text matching.
-Classification match was 0.973 for low resistance, 0.980 for medium resistance,
+Classification accuracy was 0.973 for low resistance, 0.980 for medium resistance,
 and 0.957 for high resistance. Text match showed a similar but slightly noisier
 pattern, with scores of 0.950, 0.940, and 0.930 for low, medium, and high
-resistance respectively. These results suggest that the diagnostic agent was
-often still able to recover the correct broad diagnosis even when the
-conversation became less cooperative.
+resistance respectively.
 
 \begin{table}[t]
 \centering
@@ -144,7 +135,7 @@ conversation became less cooperative.
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrrr}
 \toprule
-Condition & Classification & Text match & Confidence & Justification & Certainty \\
+Condition & Class. accuracy & Text match & Confidence & Justification & Certainty \\
 \midrule
 Baseline & 1.000 & 0.960 & 5.00 & 4.71 & 4.24 \\
 Low & 0.973 & 0.950 & 4.97 & 4.72 & 3.76 \\
@@ -158,40 +149,37 @@ High & 0.957 & 0.930 & 4.96 & 4.39 & 3.49 \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/results/rq2_diagnostic_accuracy_by_intensity.png}
-\caption{Diagnostic classification and text-match accuracy by resistance
+\caption{Diagnostic classification accuracy and text-match accuracy by resistance
 intensity.}
 \label{fig:rq2-diagnostic-accuracy}
 \end{figure}
 
-The original evaluator's confidence score stayed very high across all
+Classification confidence stayed high across all
 conditions, decreasing only from 5.00 in the baseline to 4.96 in the
-high-resistance condition. This means that the evaluator usually classified the
-diagnosis as correct with high confidence. However, the post-hoc diagnostic-certainty metric shows a different pattern.
+high-resistance condition. This score describes the evaluator's confidence when assigning a diagnostic category. Diagnostic certainty showed a larger change.
 Diagnostic certainty decreased from 4.24 in the cooperative baseline to 3.76 in
 the low-resistance condition, 3.69 in the medium-resistance condition, and 3.49
-in the high-resistance condition. In other words, the final diagnostic text
-became somewhat less certain as resistance increased, but this decrease was
-modest compared with the stronger decline in client-side information yield
-reported for RQ1. Figure~\ref{fig:rq2-diagnostic-certainty-intensity} shows
-this intensity-level trend.
+in the high-resistance condition. This 0.75-point decrease was smaller than the
+1.91-point decrease in patient-response information yield reported for RQ1.
+Figure~\ref{fig:rq2-diagnostic-certainty-intensity} shows this intensity-level
+trend.
+
+Diagnostic justification remained at 4.71 in the baseline, 4.72 under low resistance, and 4.70 under medium resistance, before decreasing to 4.39 under high resistance.
 
 Category-level results show that diagnostic quality varied by resistance type.
-Contesting resistance had the lowest classification match among the resistant
+Contesting resistance had the lowest classification accuracy among the resistant
 categories, at 0.940. Withholding was also lower than most other categories, at
 0.967. Diverting and controlling remained relatively high, while reframing had
-the highest classification match, at 0.982. This is consistent with the RQ1
-results: categories that disrupt the structure of the assessment or challenge
-the interaction appear more harmful to diagnosis than reframing, which often
-still leaves some usable clinical information in the dialogue.
+the highest classification accuracy, at 0.982. Diagnostic certainty was lowest for controlling and withholding, at 3.44 and 3.46, and highest for diverting and reframing, at 3.97 and 3.83.
 
 \begin{table}[t]
 \centering
-\caption{Diagnostic-quality scores by resistance category, with cooperative baseline.}
+\caption{Diagnostic-quality scores by resistance category and cooperative baseline.}
 \label{tab:rq2-category}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrr}
 \toprule
-Condition/category & Classification & Text match & Confidence & Certainty \\
+Condition/category & Class. accuracy & Text match & Confidence & Certainty \\
 \midrule
 Cooperative baseline & 1.000 & 0.960 & 5.00 & 4.24 \\
 Withholding & 0.967 & 0.940 & 4.97 & 3.46 \\
@@ -207,47 +195,40 @@ Contesting & 0.940 & 0.913 & 4.96 & 3.57 \\
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/results/rq2_diagnostic_certainty_by_intensity.png}
-\caption{Post-hoc diagnostic certainty by resistance intensity.}
+\caption{Diagnostic certainty by resistance intensity.}
 \label{fig:rq2-diagnostic-certainty-intensity}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figs/results/rq2_diagnostic_certainty_by_category.png}
-\caption{Post-hoc diagnostic certainty by resistance category and intensity.}
+\caption{Diagnostic certainty by resistance category and intensity.}
 \label{fig:rq2-diagnostic-certainty}
 \end{figure}
 
-Overall, RQ2 is only partially supported. Resistant clients did not strongly
-reduce the system's primary diagnostic accuracy, especially when enough core
-symptom information remained available. However, high-intensity resistance and
-contesting-style resistance showed the clearest diagnostic degradation. The
-combination of high diagnostic accuracy and high evaluator confidence also
-suggests that the diagnostic pipeline is robust in this setting, but may not be
-very sensitive to the uncertainty introduced by resistant or incomplete patient
-answers.
+Across the main intensity conditions, classification accuracy varied between 0.957 and 0.980, compared with 1.000 in the cooperative baseline. Diagnostic certainty decreased from 4.24 in the baseline to 3.49 under high resistance, while diagnostic justification decreased from 4.71 to 4.39. At category level, contesting had the lowest classification accuracy, whereas controlling and withholding had the lowest diagnostic-certainty scores.
 
 
 \subsection{Association Between Conversation and Diagnostic Quality (RQ3)}
 
 RQ3 examines the association between conversation-quality measures and
-diagnostic-quality outcomes. The paired analysis matched the original evaluator outputs with the post-hoc evaluator outputs for all 925 main-experiment conversations. Analyses involving information yield used 923 conversations, because two conversations did not receive a valid information-yield score.
+diagnostic-quality outcomes. The paired analysis matched the rubric-based and diagnostic evaluation outputs with the patient-response evaluation outputs for all 925 main-experiment conversations. Analyses involving information yield used 923 conversations, because two conversations did not receive a valid information-yield score.
 
 Table~\ref{tab:rq3-correlations} reports selected Pearson correlations. Overall
-information yield was correlated with the original evaluator's average
+information yield was correlated with the rubric average
 conversation-quality score ($r=0.34$), and overall question responsiveness
 showed a similar correlation ($r=0.36$). Correlations with final diagnostic
 accuracy were smaller. Information yield was weakly correlated with
-classification match ($r=0.08$) and text match ($r=0.04$). The original
+classification accuracy ($r=0.08$) and text match ($r=0.04$). The
 conversation-quality average was also weakly correlated with classification
-match ($r=0.02$) and text match ($r=0.01$). For diagnostic certainty, the
+accuracy ($r=0.02$) and text match ($r=0.01$). For diagnostic certainty, the
 correlations were $r=0.24$ for information yield and $r=0.22$ for question
 responsiveness.
 
 \begin{table}[t]
 \centering
 \caption{Selected correlations between conversation-quality and diagnostic
-metrics across all generated conversations.}
+metrics in the main experimental dataset.}
 \label{tab:rq3-correlations}
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrr}
@@ -256,9 +237,9 @@ Conversation metric & Diagnostic or quality metric & Pearson $r$ \\
 \midrule
 Information yield & Rubric average & 0.34 \\
 Question responsiveness & Rubric average & 0.36 \\
-Information yield & Classification match & 0.08 \\
+Information yield & Classification accuracy & 0.08 \\
 Information yield & Text match & 0.04 \\
-Rubric average & Classification match & 0.02 \\
+Rubric average & Classification accuracy & 0.02 \\
 Rubric average & Text match & 0.01 \\
 Information yield & Diagnostic certainty & 0.24 \\
 Question responsiveness & Diagnostic certainty & 0.22 \\
@@ -269,11 +250,11 @@ Question responsiveness & Diagnostic certainty & 0.22 \\
 
 Table~\ref{tab:rq3-yield-quartiles} presents the same comparison after grouping
 evaluated conversations with valid information-yield scores into information-yield quartiles. The lowest
-information-yield quartile had a mean classification match of 0.948 and a mean
+information-yield quartile had a mean classification accuracy of 0.948 and a mean
 diagnostic certainty score of 3.37. The highest information-yield quartile had a
-mean classification match of 0.982 and a mean diagnostic-certainty score of
+mean classification accuracy of 0.982 and a mean diagnostic-certainty score of
 3.88. Across the four quartiles, diagnostic certainty increased from 3.37 to
-3.88, while classification match remained high in all quartiles.
+3.88, while classification accuracy remained high in all quartiles.
 
 \begin{table}[t]
 \centering
@@ -282,7 +263,7 @@ mean classification match of 0.982 and a mean diagnostic-certainty score of
 \resizebox{\linewidth}{!}{%
 \begin{tabular}{lrrrr}
 \toprule
-Information-yield quartile & $n$ & Information yield & Classification match & Diagnostic certainty \\
+Information-yield quartile & $n$ & Information yield & Class. accuracy & Diagnostic certainty \\
 \midrule
 Q1 lowest & 231 & 2.42 & 0.948 & 3.37 \\
 Q2 & 243 & 3.58 & 0.971 & 3.64 \\
@@ -293,9 +274,130 @@ Q4 highest & 226 & 4.88 & 0.982 & 3.88 \\
 }
 \end{table}
 
-Overall, RQ3 shows that lower conversation quality was only weakly associated with final diagnostic correctness, but was more clearly associated with diagnostic certainty. The diagnostic agent often recovered the correct broad diagnosis even from lower-quality resistant conversations, while the certainty of the final diagnostic text was more sensitive to reduced information yield.
+The association between conversation quality and diagnostic accuracy was weak in the main experiment. Information yield and question responsiveness had larger positive correlations with diagnostic certainty than with classification or text-match accuracy.
 
 \subsection{Conversation Characteristics (RQ4)}
+
+RQ4 examines how resistance changes observable characteristics of the patient
+responses. Table~\ref{tab:rq4-intensity} reports answer length, short-answer
+rate, nonresponse rate, question responsiveness, and information yield across
+the four conditions.
+
+The mean patient-answer length increased from 29.49 words in the cooperative
+baseline to 31.03, 32.75, and 35.94 words under low, medium, and high
+resistance respectively. At the same time, question responsiveness decreased
+from 4.98 to 3.21 and information yield decreased from 4.97 to 3.06. The
+short-answer rate increased from 0.0\% in the baseline to 5.5\% under high
+resistance, while the nonresponse rate increased from 0.0\% to 3.4\%.
+
+\begin{table}[t]
+\centering
+\caption{Patient-response characteristics by resistance intensity.}
+\label{tab:rq4-intensity}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & Mean words & Short (\%) & No response (\%) & Respons. & Info. yield \\
+\midrule
+Baseline & 29.49 & 0.0 & 0.0 & 4.98 & 4.97 \\
+Low & 31.03 & 1.5 & 0.9 & 4.53 & 4.43 \\
+Medium & 32.75 & 2.9 & 1.7 & 3.92 & 3.80 \\
+High & 35.94 & 5.5 & 3.4 & 3.21 & 3.06 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The response characteristics differed substantially across resistance
+categories (Table~\ref{tab:rq4-category}). Withholding produced the shortest
+answers, with a mean of 18.18 words, and was the only category with substantial
+short-answer and nonresponse rates. Diverting produced the longest answers, at
+58.44 words on average. However, its mean responsiveness and information yield
+were 3.70 and 3.71, compared with 4.96 and 4.78 for reframing. Controlling and
+contesting produced answers of similar length to the cooperative baseline but
+had the lowest responsiveness and information-yield scores.
+
+\begin{table}[t]
+\centering
+\caption{Patient-response characteristics by resistance category.}
+\label{tab:rq4-category}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrr}
+\toprule
+Category & Mean words & Short (\%) & No response (\%) & Respons. & Info. yield \\
+\midrule
+Withholding & 18.18 & 20.0 & 12.0 & 3.89 & 3.54 \\
+Reframing & 29.64 & 0.0 & 0.0 & 4.96 & 4.78 \\
+Diverting & 58.44 & 0.0 & 0.0 & 3.70 & 3.71 \\
+Controlling & 32.09 & 0.0 & 0.0 & 3.36 & 3.29 \\
+Contesting & 30.22 & 0.0 & 0.0 & 3.24 & 3.22 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The subcategory-level extremes clarify these category averages. Silence or
+nonresponse had a mean answer length of 16.94 words, a short-answer rate of
+36.9\%, and a nonresponse rate of 23.9\%. Vague or minimal information had a
+similarly low mean length of 19.43 words but a nonresponse rate of 0.0\%.
+Irrelevant verbosity had the largest mean answer length, at 83.94 words, while
+its information-yield score was 4.03. Thus, the increase in mean answer length
+at higher intensity did not correspond to an increase in clinically usable
+information.
+
+\subsection{Exploratory Forced-Resistance Stress Test}
+
+The separate 60-conversation stress test examined the diagnostic pipeline when
+resistance was activated on every questionnaire turn, except for the three
+truth-map-dependent reframing subcategories. Table~\ref{tab:stress-comparison}
+compares this dataset with the high-intensity condition from the main
+experiment.
+
+Classification accuracy decreased from 0.957 in the main high-intensity
+condition to 0.567 in the stress test, while text-match accuracy decreased from
+0.930 to 0.667. Question responsiveness decreased from 3.21 to 2.43 and
+information yield from 3.06 to 2.34. The changes in the diagnostic text were
+smaller: classification confidence decreased from 4.96 to 4.77, diagnostic
+justification from 4.39 to 4.09, and diagnostic certainty from 3.49 to 3.15.
+
+\begin{table}[t]
+\centering
+\caption{Main high-intensity and forced-resistance stress-test results.}
+\label{tab:stress-comparison}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrr}
+\toprule
+Measure & Main high intensity & Stress test \\
+\midrule
+Classification accuracy & 0.957 & 0.567 \\
+Text-match accuracy & 0.930 & 0.667 \\
+Question responsiveness & 3.209 & 2.434 \\
+Information yield & 3.058 & 2.341 \\
+Classification confidence & 4.960 & 4.767 \\
+Diagnostic justification & 4.393 & 4.085 \\
+Diagnostic certainty & 3.493 & 3.150 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The category-level classification accuracy was 0.30 for contesting, 0.40 for
+controlling, 0.40 for withholding, and 0.60 for diverting. These four categories
+were activated on every questionnaire turn. Reframing retained its truth-map
+restriction, resulting in an observed activation rate of 0.278 and a
+classification accuracy of 1.00. The reframing result is therefore based on a
+different activation pattern from the other stress-test categories.
+
+Incorrectly classified stress-test reports still received a mean classification
+confidence score of 4.58 and a mean diagnostic-justification score of 4.15. For
+correctly classified reports, the corresponding means were 4.91 and 4.03.
+A manual inspection also identified reports that treated questionnaire wording
+as patient-endorsed evidence. In one PTSD conversation using silence or
+nonresponse, the patient answers after the opening consisted only of brief
+hesitations, actions, and silence. The resulting report nevertheless described
+depression, mania, auditory hallucinations, substance misuse, and suicidal
+ideation, and assigned a provisional diagnosis of schizoaffective disorder.
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../thesis"
