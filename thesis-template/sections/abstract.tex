@@ -1,28 +1,3 @@
-LAST
+Large language model (LLM) agents can generate controlled mental health assessment dialogues from predefined clinical profiles, but these simulations commonly assume that the client answers are cooperative. This thesis studies how profile-based client resistance affects a questionnaire-driven multi-agent diagnostic workflow. We construct the study based on DSM5AgentFlow and add 12 resistant-client subcategories covering withholding, diverting, reframing, contesting, and controlling responses. Resistance is controlled at the turn level and evaluated under low, medium, high, and extreme intensity conditions while the clinical profiles and assessment questionnaire remain fixed.
 
-This first and short section includes a summary of the work.
-%
-A strong abstract highlights the research problem, which the thesis addresses,
-succinctly describes why the problem is worth pursuing, highlights the thesis's
-contributions towards addressing the problem.
-
-
-For more detailed instructions on writing a good thesis at the VU, consult the
-VUSec thesis guide~\cite{VUSec-WebArticle2022} or Animesh's
-notes~\cite{Trivedi-WebArticle2021}.
-%
-There are many excellent guides on technical writing (e.g., \cite{Jones-Talk2015, Heiser-Talk2018});
-please consult them to improve your writing.
-%
-We \stress{strongly recommend} that you read, at the very least, “The Elements
-of Style” by William Strunk Jr.~\cite{William-Strunk-Jr.-Book1918}.
-
-
-\stress{Start writing from \textbf{day one} of your project and keep refining}
-the document until the end.
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../thesis"
-%%% End:
+The evaluation uses 1,225 simulated conversations across five clinical profiles. Conversation quality, diagnostic quality, resistance fidelity, and patient-response characteristics are measured with rubric-based and deterministic metrics. Among conversations with at least one activated turn, mean resistance fidelity is 4.89 or higher on a five-point scale at every intensity. Inferential analyses show that resistance has larger effects on question responsiveness and information yield than on the broader conversation rubric. Diagnostic accuracy remains high from low through high intensity, while diagnostic certainty declines. Under extreme resistance, primary classification accuracy falls from 0.963 to 0.583 and diagnostic certainty decreases to 3.30. These results show that the workflow tolerates substantial resistance while some clinical information remains available, but becomes unreliable when resistant responses dominate the assessment. Illustrative inspection also shows that a diagnostic report may infer symptoms from responses that provide little usable evidence.

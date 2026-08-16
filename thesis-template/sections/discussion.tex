@@ -1,12 +1,34 @@
 \section{Discussion}\label{s:discussion}
 
-A “limitations” section, as the name implies, describes scenarios where the
-proposed solution may not work well. Although a “discussion” section could also
-highlight limitations of the proposed work, it focuses on analyzing the
-implications of the proposed work for current and future research.
+The main finding is that resistance affected information gathering before it affected the final diagnosis. Question responsiveness and information yield decreased steadily, while diagnostic classification remained largely accurate from low through high intensity. Classification accuracy fell sharply only under extreme resistance. The category results also showed different forms of disruption, including short or absent answers, irrelevant detail, challenges to the assessment, and attempts to control its direction.
 
+\subsection{Conversation Quality and Client-Side Measures}
 
+Resistance affected the patient-response measures more strongly than the broad conversation rubric. Responsiveness and information yield fell steadily from baseline through extreme, while the rubric mean decreased more modestly. The rubric combines several properties of the conversation, whereas responsiveness and information yield focus on whether each patient answer addresses the current question and provides useful evidence. A conversation can therefore complete the questionnaire and retain a moderate rubric score even when the patient supplies much less diagnostic information. In a questionnaire-based assessment, completing the interview and gathering sufficient information are not the same outcome.
 
+Silence and vague answers reduced the amount of text, while irrelevant verbosity greatly increased it. Contesting and controlling often produced answers close to the baseline length but avoided the requested information or interfered with the assessment. Responsiveness and information yield captured these less visible forms of disruption.
+
+\subsection{Diagnostic Robustness and Limited Evidence}
+
+Diagnostic accuracy changed little from low through high intensity, despite lower responsiveness and information yield. These conversations still contained non-activated turns that could disclose profile information. In addition, the clinical profile remained in the patient agent's prompt on activated turns, so resistant responses could still reveal parts of the case. Either route may have left enough evidence in the dialogue for the diagnostic agent to identify the assigned disorder. The present analysis does not trace which parts of the dialogue supported each diagnosis, so it cannot determine which route mattered most.
+
+Diagnostic certainty changed earlier than accuracy. From low to high intensity, certainty decreased even though classification accuracy remained high. Resistance therefore affected how confidently the reports stated their conclusions before it affected whether the primary diagnosis was correct.
+
+Under extreme resistance, classification accuracy fell from 0.963 at high intensity to 0.583. The relationship between information yield and accuracy was statistically reliable when all conditions were analyzed together, but not after extreme resistance was removed. Among the 925 baseline-to-high conversations, 908 were classified correctly, leaving only 17 errors for comparison. This ceiling effect makes smaller changes difficult to detect. The experiment therefore shows a clear failure under extreme resistance, but it does not locate the amount of information at which diagnostic accuracy begins to decline.
+
+Reframing requires separate interpretation. Its truth map controls whether the reframing instruction can be added to a turn, but it does not remove the clinical profile from the patient prompt. On ineligible turns, the patient returns to an ordinary profile-grounded response and may still disclose symptoms or background information from that profile. This additional information, together with the lower activation rate, may explain why reframing retained high diagnostic accuracy. Its result does not show that reframing is inherently less disruptive. Future comparisons should report activation among eligible turns and measure the information disclosed on non-activated turns.
+
+After reframing was excluded, classification accuracy did not differ across the remaining categories, but diagnostic justification and certainty did. Resistance category therefore affected how the report supported and expressed its conclusion more clearly than whether it selected the correct primary label. This is another reason not to evaluate diagnostic performance through accuracy alone.
+
+The extreme condition also exposed a problem in how evidence was attributed. Some reports gave a specific diagnosis despite receiving little usable information. In one inspected example, the report treated the wording of an unanswered questionnaire item as if the patient had endorsed the symptom. Because the questionnaire itself names possible symptoms, the diagnostic agent must distinguish what was asked from what the patient confirmed. The reviewed examples are not a systematic error analysis, but they motivate two safeguards: linking each claimed symptom to a patient response and allowing an ``insufficient information'' outcome when the dialogue does not support a diagnosis.
+
+\subsection{Limitations and Future Work}
+
+The study uses synthetic conversations rather than interactions with real clients. Its repeated runs reuse the same five profiles and condition prompts, so they represent repeated model generations rather than independent patient cases. Gemini 2.5 Flash is used for all three agents and most evaluation; some findings may therefore be model-specific, and using the same model for generation and scoring may introduce bias. Generalization requires testing other models and assessment settings, as well as clinical review of the resistance taxonomy.
+
+Intensity is implemented mainly through activation frequency. Expression levels are used to reduce repetitive wording, with a small intensity-dependent sampling preference. Low, medium, and high use probabilistic activation, whereas extreme activates every eligible turn and always uses Level 3 guidance. Extreme is therefore not simply a higher value on the same probability range. Future work could add probabilistic conditions between high and extreme to test whether diagnostic accuracy declines gradually or only when resistance appears on almost every turn. Reframing introduces another difference: its truth map limits activation to profile-positive turns, while responses on other turns may still disclose profile information. Future work should evaluate reframing separately by reporting how often it appeared on profile-positive turns and how much clinical information was disclosed on other turns.
+
+The evaluation relies mainly on automatic LLM judgments. Resistance fidelity was not verified by multiple human annotators, and the reviewed diagnostic errors were illustrative rather than systematically coded. The results therefore describe behavior within this simulation, not clinical validity. Future evaluation should add human ratings and a systematic analysis of all misclassified reports.
 
 %%% Local Variables:
 %%% mode: latex

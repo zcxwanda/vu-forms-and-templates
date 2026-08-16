@@ -1,5 +1,6 @@
 \section{Experimental Setup}\label{s:experimental-setup}
-The evaluation is organized around four research questions.
+
+The experiments address four research questions.
 
 \parab{RQ1: Conversation quality.}
 How does the presence of profile-based resistant clients influence overall conversation quality? Additionally, how does performance vary across different resistance categories?
@@ -7,7 +8,7 @@ How does the presence of profile-based resistant clients influence overall conve
 \parab{RQ2: Diagnostic quality.}
 How does the presence of profile-based resistant clients influence overall diagnostic quality? Additionally, how does performance vary across different resistance categories?
 
-\parab{RQ3: Relationship between conversation and diagnosis.}
+\parab{RQ3: Quality association.}
 What is the association between conversation quality and diagnostic quality?
 
 \parab{RQ4: Conversation characteristics.}
@@ -16,67 +17,62 @@ How does the presence of profile-based resistant clients influence conversation 
 \subsection{Materials}
 
 \paragraph{Assessment Questionnaire.}
-All conversations use the adult DSM-5 Self-Rated Level 1 Cross-Cutting Symptom Measure~\cite{apa2013level1}. The measure contains 23 items covering 13 psychiatric domains, including depression, anger, mania, anxiety, psychosis, sleep problems, cognition, and substance use. In this study, the items provide a fixed assessment structure for the assistant--patient conversation. The same questionnaire is used in every experimental condition so that the assessment content remains constant across cooperative and resistant clients.
+All conversations use the adult DSM-5 Self-Rated Level 1 Cross-Cutting Symptom Measure~\cite{apa2013level1}. Its 23 items cover 13 psychiatric domains, including depression, anger, mania, anxiety, psychosis, sleep problems, cognition, and substance use. The assistant presents the same items in every condition, giving all simulated clients the same assessment structure.
 
-\paragraph{Clinical Profiles and Diagnostic Materials.}
-The experiment uses five clinical profiles included in the DSM5AgentFlow codebase: depression, anxiety, post-traumatic stress disorder, bipolar disorder, and schizophrenia. Each profile defines the expected disorder together with symptoms and background information for the simulated patient. These profiles provide the reference labels used to evaluate the final diagnoses. The diagnostic agent also has access to the local DSM-5 document collection used by DSM5AgentFlow, including APA disorder fact sheets, when producing its diagnostic report.
+\paragraph{Clinical Profiles and Diagnostic Documents.}
+The experiment uses five profiles from the DSM5AgentFlow codebase: depression, anxiety, post-traumatic stress disorder, bipolar disorder, and schizophrenia. Each profile contains a target disorder, symptoms, and background information for patient generation. The target disorder is also the expected label for diagnostic evaluation. When producing its final report, the diagnostic agent retrieves relevant passages from a local collection of APA DSM-5 fact sheets~\cite{apadsmfactsheets}.
 
 \paragraph{Resistance Conditions.}
-The resistant-client conditions cover the 12 resistance subcategories summarized in Appendix~\ref{s:appendix-taxonomy}. Each resistance subcategory is tested under three intensity conditions: low, medium, and high. The prompt construction, turn-level activation mechanism, expression guidance, cooldown, and truth-map restriction used to generate these conditions are described in Section~\ref{s:methodology}.
+The experiment covers all 12 subcategories in the taxonomy. Each is evaluated under low, medium, high, and extreme intensity. Low through high use the probabilistic activation mechanism, while extreme activates every non-reframing questionnaire turn and every truth-map-positive reframing turn. Section~\ref{s:methodology} describes the generation procedure.
 
+\subsection{Conversation Dataset}
 
-\subsection{Conversation Datasets}
-
-\paragraph{Main Dataset.}
-The main experiment follows a controlled factorial design. For each of the five clinical profiles, it includes one cooperative baseline and resistant-client conditions covering 12 resistance subcategories at three intensity settings. Every condition is repeated five times. The resulting dataset contains
+For each of the five clinical profiles, the dataset contains five cooperative baseline conversations. Every resistant condition is defined by a clinical profile, one of 12 subcategories, one of four intensities, and one of five repeated runs. The complete dataset therefore contains
 \[
-5 \times 5 \times (12 \times 3 + 1) = 925
+(5 \times 5) + (5 \times 12 \times 4 \times 5) = 1{,}225
 \]
-conversations. Each conversation contains the complete assistant--patient dialogue, the final clinical observation and diagnostic report, and the condition metadata used in the evaluation.
+conversations. Each saved record contains the assistant--patient dialogue, clinical observation, diagnostic report, condition metadata, turn-level activation metadata, and evaluation results.
 
 \begin{table}[t]
     \centering
-    \tabcap{Number of conversations in the main experimental dataset.}
+    \tabcap{Conversation counts by experimental condition.}
     \label{tab:results-dataset-size}
     \begin{tabular}{lrr}
         \toprule
-        \thead{Condition} & \thead{Conversations} & \thead{Runs per condition} \\
+        \thead{Condition} & \thead{Conversations} & \thead{Runs} \\
         \midrule
         Cooperative baseline & 25 & 5 \\
         Low resistance & 300 & 5 \\
         Medium resistance & 300 & 5 \\
         High resistance & 300 & 5 \\
+        Extreme resistance & 300 & 5 \\
         \midrule
-        Total & 925 & -- \\
+        Total & 1,225 & -- \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\paragraph{Exploratory Stress-Test Dataset.}
-A separate dataset is used to examine the diagnostic pipeline when resistance is applied throughout the questionnaire. For all subcategories except minimization, externalization, and denial, resistance is activated on every questionnaire turn and each activated questionnaire response uses expression level 3. For these three subcategories, resistance is instead activated on every profile-positive questionnaire item identified by the truth map described in Section~\ref{s:methodology}. The dataset contains one conversation for each combination of five clinical profiles and 12 resistance subcategories, giving 60 conversations in total. This stress test is analyzed separately and is not treated as a fourth intensity level in the main factorial experiment.
-
-
 \subsection{Evaluation Metrics}
 
-The evaluation is organized around three objectives: conversation quality, diagnostic quality, and resistance realization and behavioral characteristics. Table~\ref{tab:metrics-rq-map} summarizes the measures used for each objective.
+The evaluation has three objectives: conversation quality, diagnostic quality, and resistance realization with behavioral characteristics. Table~\ref{tab:metrics-rq-map} maps the measures to these objectives and research questions.
 
 \begin{table*}[t]
     \centering
     \small
-    \tabcap{Evaluation objectives and corresponding measures.}
+    \tabcap{Evaluation objectives and measures.}
     \label{tab:metrics-rq-map}
     \begin{tabular}{p{0.20\textwidth} p{0.50\textwidth} p{0.18\textwidth}}
         \toprule
-        \thead{Evaluation objective} & \thead{Measures} & \thead{Research questions} \\
+        \thead{Objective} & \thead{Measures} & \thead{Research questions} \\
         \midrule
         Conversation quality &
-        DSM-5 coverage, clinical relevance, consistency, empathy/professionalism, rubric average, question responsiveness, information yield &
-        RQ1 and RQ3 \\
+        DSM-5 coverage, clinical relevance, consistency, empathy/professionalism, conversation-rubric mean, question responsiveness, information yield &
+        RQ1, RQ3, and RQ4 \\
         Diagnostic quality &
-        Diagnosis classification accuracy, text-match accuracy, diagnostic justification, classification confidence, diagnostic certainty &
+        Classification accuracy, text-match accuracy, diagnostic justification, diagnostic certainty &
         RQ2 and RQ3 \\
-        Resistance realization and behavioral characteristics &
-        Resistance fidelity, observed activation rate, patient-answer length, activated-answer length, short-answer rate, nonresponse rate &
+        Resistance realization and behavior &
+        Resistance fidelity, observed activation rate, answer length, short-answer rate, nonresponse rate &
         RQ4 \\
         \bottomrule
     \end{tabular}
@@ -84,27 +80,35 @@ The evaluation is organized around three objectives: conversation quality, diagn
 
 \subsubsection{Conversation Quality}
 
-Conversation quality is evaluated from both the overall assessment and the patient responses. The rubric-based measures adopted from DSM5AgentFlow score DSM-5 coverage, clinical relevance, logical consistency, diagnostic justification, and empathy/professionalism on five-point scales. Their mean is reported as the rubric average. Together, these measures capture whether the assessment covers clinically relevant material, remains coherent, and provides evidence for the final diagnostic report.
-
-Two additional five-point measures focus on the information provided by the patient. Question responsiveness measures how directly a patient response addresses the current assessment question. Information yield measures how much clinically usable information the response contributes. Long responses do not receive high scores when their additional detail is clinically irrelevant. Both measures are calculated across all patient turns and separately across activated resistance turns. The all-turn scores describe the complete conversation, while the activated-turn scores isolate the responses in which resistance was expressed.
+Four five-point rubric measures are based on the DSM5AgentFlow evaluation framework: DSM-5 coverage, clinical relevance, consistency, and empathy/professionalism. Their mean is reported as the conversation-rubric mean. Question responsiveness measures how directly each patient answer addresses the current item. Information yield measures how much clinically useful information the answer provides; irrelevant detail does not increase the score simply because the answer is long. Responsiveness and information yield are averaged across all questionnaire-response turns and separately across activated turns.
 
 \subsubsection{Diagnostic Quality}
 
-Diagnostic quality is evaluated by comparing the generated diagnosis with the expected diagnosis in the clinical profile. Classification accuracy compares the primary diagnostic class assigned by the evaluator with the expected profile label. Text-match accuracy checks whether the expected disorder name or a recognized variant appears anywhere in the diagnostic report. These measures are reported separately because a report may mention the expected disorder while assigning a different primary diagnosis.
-
-Diagnostic justification, adopted from the DSM5AgentFlow rubric, measures whether the report supports its conclusion with evidence from the conversation. Classification confidence measures how confident the evaluator is when assigning the report to a diagnostic category. Diagnostic certainty measures how confidently the final diagnostic report presents its conclusion, using a five-point scale.
+Classification accuracy compares the primary class assigned by the evaluator with the profile label. Text-match accuracy checks whether the expected disorder or a predefined name variant appears anywhere in the report; for example, ``depressive'' and ``MDD'' are accepted for depression, and ``post-traumatic'' is accepted for PTSD. The two measures can differ when a report mentions the expected disorder but selects another primary diagnosis. Diagnostic justification measures how well the report supports its conclusion with evidence from the dialogue. Diagnostic certainty measures how clearly the report commits to its diagnostic conclusion. Justification and certainty use five-point scales.
 
 \subsubsection{Resistance Realization and Behavioral Characteristics}
 
-Resistance fidelity is scored on activated turns and measures how closely the generated patient response matches the assigned resistance subcategory. The observed activation rate is calculated directly from the turn-level metadata and shows how often resistance was applied in the generated conversation.
+Resistance fidelity is scored only on activated turns and measures how closely the response matches the assigned subcategory. The observed activation rate is calculated as activated questionnaire turns divided by all patient questionnaire turns. Mean answer length, short-answer rate, and nonresponse rate are calculated directly from questionnaire responses. A short answer contains at most three alphanumeric words. A nonresponse is empty, contains only an action, or consists of a silence or hesitation marker such as \texttt{[silence]}, ``huh'', or ``mmm''. These measures capture different response forms rather than one general resistance score: short answers and nonresponses are most relevant to withholding, while unusually long answers are most relevant to irrelevant verbosity. Responsiveness and information yield capture whether answers remain useful even when their length is similar to the baseline.
 
-Behavioral characteristics are calculated directly from the patient responses. They include mean patient-answer length, mean activated-answer length, short-answer rate, and nonresponse rate. These measures describe visible differences between resistance categories without requiring an additional LLM judgment. In RQ4, responsiveness and information yield are reported alongside these measures to distinguish response length from clinical usefulness.
+\subsection{Statistical Analysis}
 
+Each conversation is analyzed as one data point. The analyses compare the five experimental conditions (baseline, low, medium, high, and extreme) and compare resistance categories within the resistant conditions. Because the conversations are repeated generations from fixed profiles and prompts, the inferential results describe this experimental setting rather than a population of independent patients.
+
+\paragraph{Five-Point Scores and Conversation Measures.}
+Five-point evaluation scores and numerical conversation measures are compared using Kruskal--Wallis tests. This test determines whether at least one condition or category differs from the others. Results with $p<.05$ are treated as statistically significant. Epsilon squared ($\epsilon^2$) describes the size of the overall group difference: values closer to zero indicate weaker separation, while larger values indicate stronger separation. Because the overall test does not identify which groups differ, significant results are followed by Mann--Whitney pairwise comparisons. Their $p$-values are adjusted using the Holm method to account for multiple comparisons. Rank-biserial correlation is reported for selected pairwise comparisons to show the size and direction of the difference.
+
+\paragraph{Targeted Behavioral Checks.}
+RQ4 first compares response characteristics across the cooperative baseline and resistance categories. It then checks whether the intended response form becomes more pronounced across low, medium, high, and extreme intensity within each non-reframing subcategory. The selected measure follows the subcategory definition: mean answer length is used for vague or minimal information and irrelevant verbosity, nonresponse rate for silence or nonresponse, and responsiveness for the remaining diverting, contesting, and controlling subcategories. Each measure is compared across the four intensities using a Kruskal--Wallis test. The nine resulting $p$-values are adjusted together using the Holm method. Reframing is not included in this targeted intensity check because its truth map restricts activation to eligible questionnaire items.
+
+\paragraph{Binary Diagnostic Outcomes.}
+Classification accuracy and text-match accuracy are recorded as correct or incorrect. Pearson chi-square tests are used to determine whether the proportion of correct outcomes differs across conditions or categories. We report the test statistic $\chi^2$, the $p$-value, and Cramer's $V$ as the effect size. Pairwise condition comparisons use Fisher's exact test. For these comparisons, we also report the difference in accuracy and its 95\% confidence interval.
+
+\paragraph{Associations Between Conversation and Diagnostic Quality.}
+For RQ3, Spearman's rank correlation coefficient ($\rho$) is used to examine whether information yield is associated with the conversation-rubric mean and diagnostic certainty. The coefficient ranges from $-1$ to $1$: positive values mean that the two measures tend to increase together, and larger absolute values indicate a stronger association. The association between information yield and classification accuracy is analyzed separately using logistic regression because classification accuracy is binary. Information yield is standardized, and experimental condition and clinical profile are included as control variables. The reported odds ratio therefore represents the change in the odds of a correct classification for a one-standard-deviation increase in information yield. The model is fitted once using all conditions and once using only the baseline-to-high conditions, where diagnostic accuracy has a strong ceiling effect.
+
+\paragraph{Additional Checks and Reporting.}
+Category comparisons are repeated without reframing because its truth-map restriction produces a much lower activation rate than the other categories. This sensitivity analysis checks whether the category results remain when activation rates are more comparable. All tests are two-sided and use $\alpha=.05$. Error bars in Figures~\ref{fig:rq1-intensity} and~\ref{fig:rq2-intensity} show bootstrap 95\% confidence intervals based on 5,000 resamples. Information-yield quartiles are presented only as a descriptive illustration and are not used as a substitute for the statistical tests.
 
 \subsection{Implementation Details}
-Gemini 2.5 Flash is used for the assistant, patient, and diagnostic agents in all conversation-generation conditions. It is also used for the rubric-based, diagnostic, and patient-response LLM evaluations. The same model is used across all experimental conditions, so the cooperative and resistant runs do not differ in model choice. The exploratory stress-test conversations are generated with a separate script and are kept separate from the main experimental dataset.
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../thesis"
-%%% End:
+Gemini 2.5 Flash (\texttt{gemini-2.5-flash}) is accessed through Google's OpenAI-compatible Gemini API and used for the assistant, patient, and diagnostic agents in every condition. The same model is also used for rubric-based, diagnostic, and patient-response evaluation. All model calls use a temperature of 0.7. During diagnosis generation, the retriever returns at most five relevant documents from the local APA collection. No fixed random seed is used; the five repeated runs capture variation from activation sampling and model generation. Keeping the model fixed ensures that the experimental conditions differ in resistance configuration rather than provider or model choice.

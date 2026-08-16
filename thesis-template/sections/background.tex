@@ -1,46 +1,46 @@
-\section{Background}\label{s:background}
+\section{Background and Related Work}\label{s:background}
 
-DSM5AgentFlow provides the base workflow for this study. This section describes its agents, the clinical profiles used to simulate patients, and the resistance taxonomy used in the experiments.
+\subsection{LLM-Based Patient Simulation}
 
-\subsection{DSM5AgentFlow and Agents}
+We construct this work based on DSM5AgentFlow, which uses LLM agents to generate questionnaire-based assessment dialogues from clinical profiles and produce diagnoses with support from retrieved DSM-5 documents~\cite{ozgun2025trustworthyaipsychotherapymultiagent}.
 
-DSM5AgentFlow is a multi-agent LLM workflow for questionnaire-based mental health assessment and explainable mental disorder diagnosis~\cite{ozgun2025trustworthyaipsychotherapymultiagent}. In this system, a patient agent generates responses from a clinical profile, an assistant agent conducts the assessment, and a diagnostic agent produces a final diagnostic report from the completed dialogue.
+Other work has used LLMs to simulate patients for clinical and counseling training. Roleplay-doh converts expert feedback into principles that guide simulated mental health patients~\cite{louie2024roleplaydoh}. PATIENT-$\psi$ combines cognitive models with conversational styles for cognitive behavioral therapy training~\cite{wang2024patientpsi}, while EvoPatient develops patient and doctor agents through repeated simulated diagnostic interactions~\cite{du2025evopatient}. These studies show that LLM patient behavior can be shaped through profiles and behavioral instructions.
 
-For this thesis, the workflow provides a controlled setting in which the questionnaire and clinical profile remain unchanged while the patient agent's response behavior is varied. Cooperative and resistant conditions can therefore be compared under the same assessment structure.
+The present study uses behavioral instructions for a different purpose: it varies the patient's cooperation while keeping the clinical case and questionnaire fixed. This allows the effects of specific resistant response patterns on the dialogue and final diagnosis to be compared under controlled conditions.
 
-The original setting assumes a cooperative simulated patient. The patient agent answers the assistant's questions and provides information according to the assigned clinical profile. This produces useful baseline dialogues but does not show how the system behaves when the client is vague, avoidant, challenging, or otherwise difficult to assess.
+\subsection{Clinical Profiles and Grounding}
 
+The patient agent is generated from a clinical profile that specifies a target disorder, relevant symptoms, and background information. The profile provides the reference case for both patient generation and diagnostic evaluation. Patient answers should therefore remain consistent with the profile even when resistance changes how the information is presented.
 
-\subsection{Clinical Profiles and Profile Grounding}
-
-In DSM5AgentFlow, simulated patients are generated from clinical profiles. A clinical profile specifies the target disorder, relevant symptoms, and sometimes the response style of the simulated client. In this thesis, the clinical profile serves as the grounding source for patient generation: clinically meaningful answers should remain consistent with the assigned profile.
-
-Because the diagnostic agent uses the generated dialogue as evidence, symptoms that are not supported by the clinical profile may change the resulting diagnosis. Such additions would also make it difficult to determine whether an observed effect was caused by resistance or by changes to the clinical case. This issue is particularly relevant to resistance that denies or reframes symptoms. Section~\ref{s:methodology} describes the grounding controls used for these subcategories.
-
+Profile adherence matters because unsupported symptoms can alter the diagnostic evidence. Roleplay-doh found that initial GPT-4 responses failed to satisfy expert-defined patient principles or dialogue conventions in 20\% of cases~\cite{louie2024roleplaydoh}. In this study, unsupported additions would also make it unclear whether a diagnostic change was caused by resistance or by a change in the simulated case. Section~\ref{s:methodology} describes the prompt boundaries and truth maps used to reduce this problem.
 
 \subsection{Client Resistance}
 
-In this thesis, resistance is defined through patterns in the patient's answers. The taxonomy describes what the patient does during the conversation, such as withholding information or challenging the assessment. It does not attempt to explain why a real client might show the same behavior.
+Psychotherapy research does not use a single definition of client resistance. Behavioral coding frameworks identify resistance from observable moments in which clients limit, divert, or oppose therapeutic work~\cite{chamberlain1984observation,otani1989client}. Other frameworks organize resistance around the therapeutic task being resisted, such as discussing painful affect, recalling personal material, or accepting change~\cite{mahalik1994development}. Motivational interviewing adopts a relational view, treating apparent resistance as discord that can emerge in the interaction rather than as a fixed trait of the client~\cite{miller2013motivational}.
+
+Recent computational research has studied resistance in text-based counseling through both recognition and simulation. PsyFIRE defines 13 resistance types for individual client utterances, and RECAP uses this framework to detect and classify resistance in counseling dialogue~\cite{li2026recap}. ResistClient takes a generative approach: it simulates challenging clients by linking their responses to modeled internal motivations~\cite{liu2026resistclient}. In contrast, this thesis evaluates how 12 predefined resistance subcategories affect information collection and diagnosis in a fixed questionnaire-based assessment.
+
+In this thesis, client resistance refers to observable patient responses that reduce cooperation with the assessment by making the requested information less available, changing how a profile-supported problem is presented, or disrupting the questionnaire process. This definition is closest to the event-level and response-based approaches above, but the categories are reorganized around their effect on diagnostic information collection. The taxonomy is used to control patient-response generation rather than infer a real client's intention or psychological motive. Similar responses in clinical practice may also result from symptoms, anxiety, fatigue, misunderstanding, or difficulty expressing feelings. In this thesis, the resistance label therefore identifies an experimental generation condition rather than a clinical explanation of the patient.
+
+Resistance can also affect outcomes differently depending on how it is expressed. For example, openly hostile resistance has been associated with poorer symptom change and treatment attrition in cognitive behavioral therapy for panic disorder~\cite{schwartz2019resistance}. This supports examining separate resistance categories instead of treating resistance as one uniform condition~\cite{verhulst1990resistance,beutler2002resistance}.
 
 \subsection{Resistance Dimensions and Categories}
 
-The resistance taxonomy used in this thesis distinguishes between two broad dimensions: content-dimension resistance and interaction-dimension resistance. Content-dimension resistance affects the information provided in response to the current questionnaire item. Examples include vague or minimal answers, silence, topic shifting, irrelevant verbosity, minimization, externalization, and denial. These behaviors mainly influence how much usable symptom information is available to the assistant and diagnostic agent.
+Rather than reproducing one existing framework, the taxonomy groups the resistance subcategories according to the part of the questionnaire-based assessment they mainly affect. Content resistance changes the information provided in response to the current item and includes withholding, diverting, and reframing. Interaction resistance interferes more directly with the assessment process and includes contesting and controlling.
 
-Interaction-dimension resistance affects the assessment process itself. Examples include challenging the assessment, hostile criticism, topic blocking, agenda redirection, and demanding an immediate diagnosis. These behaviors may not only reduce the information available in a particular answer, but also interfere with the questionnaire-driven structure of the dialogue.
-
-Content-dimension resistance changes the completeness and interpretability of client-provided information. Interaction-dimension resistance can additionally disrupt the flow and control of the assessment process. Table~\ref{tab:resistance-summary} summarizes the dimensions and categories used in the experiments. The full taxonomy, including terminology, category definitions, subcategory examples, and boundary rules, is provided in Appendix~\ref{s:appendix-taxonomy}.
+Table~\ref{tab:resistance-summary} summarizes the five categories and 12 subcategories. Appendix~\ref{s:appendix-taxonomy} provides the complete definitions, examples, and boundary rules.
 
 \begin{table}[tb]
     \centering
     \small
-    \tabcap{Summary of resistance dimensions and categories.}
+    \tabcap{Resistance dimensions, categories, and subcategories.}
     \label{tab:resistance-summary}
-    \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} p{0.22\linewidth} X@{}}
+    \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} p{0.21\linewidth} X@{}}
         \toprule
-        \thead{Dimension} & \thead{Category} & \thead{Example subcategories} \\
+        \thead{Dimension} & \thead{Category} & \thead{Subcategories} \\
         \midrule
-        Content & Withholding & Vague/minimal answers; silence \\
-        Content & Diverting & Topic shift; irrelevant verbosity \\
+        Content & Withholding & Vague/minimal information; silence/nonresponse \\
+        Content & Diverting & Topic shift/inattention; irrelevant verbosity \\
         Content & Reframing & Minimization; externalization; denial \\
         Interaction & Contesting & Challenging assessment; hostile criticism \\
         Interaction & Controlling & Topic blocking; agenda redirection; demanding diagnosis \\

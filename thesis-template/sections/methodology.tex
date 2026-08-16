@@ -1,21 +1,27 @@
 \section{Methodology}\label{s:methodology}
-This section describes how resistance is added to the DSM5AgentFlow patient agent. The questionnaire and clinical profile remain fixed, while resistance prompts and turn-level controls change how the patient answers are generated.
+
+Figure~\ref{fig:workflow} shows how the resistant-client simulation is integrated into the assessment workflow. The clinical profile and questionnaire remain fixed across conditions. The resistance configuration affects the patient prompt on selected turns, while the assistant and diagnostic agent do not receive the resistance labels. After the dialogue, the diagnostic agent uses the transcript and retrieved DSM-5 documents to produce a clinical observation and diagnosis. Resistance metadata is stored only for later evaluation.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.98\textwidth]{figs/resistant_client_workflow.pdf}
+    \caption{Workflow for resistant-client conversation generation and diagnosis. Solid arrows show generation and diagnostic inputs; the dashed path shows metadata stored for evaluation.}
+    \label{fig:workflow}
+\end{figure*}
 
 \subsection{Resistant-Client Generation}
-For each resistant-client condition, the patient agent is assigned a clinical profile and a resistance configuration. The clinical profile describes the simulated client's disorder, symptoms, and relevant background information. The resistance configuration specifies which resistant subcategory the patient agent should simulate and at what intensity.
 
-Each resistance configuration is converted into a prompt for the patient agent. The prompt describes the selected subcategory and its response rules without supplying a fixed answer. For example, a vague-answer prompt asks the agent to withhold detail, while an agenda-redirection prompt asks the patient to move the discussion to another issue before answering. The prompt specifies the intended response pattern, while the wording is generated in relation to the current question and preceding conversation.
+For each resistant condition, the patient agent receives a clinical profile and a resistance configuration. The clinical profile describes the disorder, symptoms, and relevant background. The resistance configuration selects one subcategory and one intensity setting.
 
-The prompt also defines boundaries between related subcategories and instructs the patient agent to remain consistent with the clinical profile. Resistance should alter how the patient communicates existing clinical information without introducing unsupported symptoms. Table~\ref{tab:prompt-template-example} shows a shortened prompt example.
+The selected subcategory is converted into an instruction for the patient agent. The instruction defines the intended response pattern without supplying a fixed answer. For example, vague/minimal information asks for an underspecified but relevant answer, while agenda redirection asks the patient to move to another assessment topic before answering. The wording is generated from the current question and dialogue context.
 
-\subsection{Intensity Control}
-Resistance intensity is implemented primarily through turn-level activation. The experiment uses three intensity settings: low, medium, and high. Each setting controls how frequently resistance is expected to appear across the conversation, rather than forcing every patient response to be resistant. Response-level expression guidance is used only as a secondary control on activated turns.
+Each prompt also includes boundary rules for nearby subcategories and grounding rules for the clinical profile. Resistance should change how existing clinical information is communicated rather than add a new symptom solely to display the selected subcategory. A shortened prompt is shown in Table~\ref{tab:prompt-template-example}.
 
-Before each patient response is generated, the system determines whether resistance should be expressed in the current turn. If resistance is not activated, the patient agent responds using the clinical profile without the resistance instruction. If resistance is activated, the prompt for the selected resistance subcategory is added to the patient instruction.
+\subsection{Intensity and Turn-Level Activation}
 
-Low, medium, and high intensity use progressively higher target activation ranges. At the start of each conversation, the system randomly selects one target rate from the corresponding range. For each following turn, it uses the previous activation decisions to adjust the activation probability. The target rate guides the overall frequency of resistance but does not prescribe the exact number or position of resistant turns.
+Low, medium, and high intensity primarily control how often resistance appears. Their target activation ranges are 0.15--0.30, 0.40--0.60, and 0.70--0.85, respectively. At the start of a conversation, one target rate $r$ is sampled from the selected range. Before each eligible patient turn, the system decides whether to include the resistance instruction.
 
-Let $a_t \in \{0,1\}$ indicate whether resistance is activated on an eligible patient turn $t$, and let $r$ denote the target rate sampled for the conversation. After at least one eligible turn, the system calculates the activation rate observed so far, $\bar{a}_{t-1}$, and updates the probability as follows:
+For the first eligible turn, the activation probability is $p_1=r$. For each later eligible turn, let $a_t \in \{0,1\}$ indicate activation on turn $t$, and let $\bar{a}_{t-1}$ be the activation rate observed on earlier eligible turns. The probability is then
 \[
 \begin{aligned}
 q_t &= r + 0.8\bigl(r-\bar{a}_{t-1}\bigr), \\
@@ -23,15 +29,16 @@ p_t &= \operatorname{clip}\bigl(c_t q_t, 0.05, 0.95\bigr), \\
 a_t &\sim \operatorname{Bernoulli}(p_t).
 \end{aligned}
 \]
-Here, $c_t$ is a cooldown factor determined by the most recent activation decisions; it equals 1 when no cooldown is applied. On the first eligible turn, $p_1=r$. The value 0.8 is a fixed adjustment coefficient used in the implementation. It controls how strongly the activation probability responds to the difference between the target rate and the observed rate. The adjustment raises the probability when the observed rate is below the target and lowers it when the observed rate is above the target. The cooldown further reduces the probability after an activated response so that activations are less likely to cluster in adjacent turns. The activation and cooldown settings are reported in Table~\ref{tab:activation-settings}.
+The difference between $r$ and $\bar{a}_{t-1}$ moves the probability toward the target rate. The cooldown factor $c_t$ lowers the probability after one or two consecutive activations, reducing clusters of resistant answers. These controls guide the distribution of resistance without fixing the exact turns in advance.
 
-During preliminary prompt tests, activated responses often repeated similar wording. To reduce this repetition, each subcategory prompt includes three expression levels. The levels provide increasingly strong guidance, from a relatively mild expression at Level 1 to a more obvious expression at Level 3. They guide the response without fixing its exact wording. One level is sampled for each activated turn, and the sampling probabilities vary slightly by intensity, as shown in Table~\ref{tab:activation-settings}. Expression level is used only to guide response generation and is not treated as a separate experimental condition. Examples are provided in Appendix~\ref{s:appendix-implementation-materials}.
+Each subcategory prompt contains three expression levels to reduce repetitive wording on activated turns. A level is sampled for each activation, with a small preference for Level 1 under low intensity, Level 2 under medium intensity, and Level 3 under high intensity. The level guides how clearly the subcategory appears in that response; it is not a separate experimental variable. The complete activation, expression, and cooldown settings are reported in Table~\ref{tab:activation-settings}.
+
+The extreme condition tests the same subcategories without probabilistic turn selection. For the nine non-reframing subcategories, resistance is activated on every questionnaire turn and Level 3 guidance is used. Reframing remains limited to profile-positive turns because denial, minimization, and externalization require a supported problem. Extreme is therefore the strongest condition, although its observed activation rate can remain below 1.0 for reframing.
 
 \subsection{Truth Maps for Reframing}
-Reframing is applied only when the current questionnaire item concerns a problem present in the clinical profile. Denying an absent symptom would be profile-consistent rather than resistant, while minimizing or externalizing it could imply a symptom that is not supported by the profile. A profile-specific truth map is used to avoid both cases.
 
-The truth map assigns each questionnaire item a positive, negative, or unknown state according to the information available in the clinical profile. A positive state indicates that the relevant problem is supported by the profile, a negative state indicates that it is absent, and an unknown state indicates that the profile does not provide enough information.
+Reframing is meaningful only when the current questionnaire item concerns a problem present in the clinical profile. Denying an absent symptom would be a truthful answer rather than resistance. Minimizing or externalizing an absent symptom could instead imply a problem that the profile does not contain.
 
-Before reframing resistance can be activated, the system checks the truth-map state of the current questionnaire item. Minimization, externalization, and denial are applied only to positive items. For negative or unknown items, the reframing instruction is not added to the patient prompt. This keeps reframing tied to profile-supported problems, although it also means that reframing may be activated less often than other resistance categories. The profile-positive items used in the experiment are summarized in Table~\ref{tab:truth-map-positive} in Appendix~\ref{s:appendix-implementation-materials}.
+To handle these cases, each clinical profile has a truth map that assigns questionnaire items a positive, negative, or unknown state. A positive state means that the problem is supported by the profile, a negative state means that it is absent, and an unknown state means that the profile does not provide enough information. Minimization, externalization, and denial are eligible only on positive items. On other items, the reframing instruction is omitted, but the clinical profile remains in the patient prompt. Table~\ref{tab:truth-map-positive} lists the positive items used in the experiment.
 
-The resistance condition and turn-level generation settings are stored in the conversation log for later analysis. This metadata is not included in the prompts sent to the assistant or diagnostic agent.
+The resistance configuration and the turn-level decisions are stored in the conversation log. These fields are used to calculate activation and resistance-fidelity measures, but they are not included in the prompts sent to the assistant or diagnostic agent.

@@ -3,33 +3,33 @@
 
 Typical questionnaire-based mental health assessments rely on the client providing information that is relevant, interpretable, and sufficiently complete for diagnostic reasoning. In simulated assessment settings, this information is often provided by a patient agent that follows a predefined clinical profile. Such profiles make it possible to generate controlled diagnostic dialogues, because the expected symptoms and disorder labels are known in advance. However, this setup also depends on an important assumption: the simulated client is willing and able to answer the assessment questions in a cooperative way.
 
-Recent work, such as DSM5AgentFlow, studies this setting through a multi-agent LLM workflow for questionnaire-based mental health assessment and explainable mental disorder diagnosis~\cite{ozgun2025trustworthyaipsychotherapymultiagent}. In this workflow, an assistant agent conducts the assessment, a patient agent responds according to a clinical profile, and a diagnostic agent produces a final diagnosis. The original setup is useful for generating and evaluating structured diagnostic dialogues, but the patient agent is primarily cooperative. It generally follows the questionnaire interaction and provides symptom information according to the assigned profile.
+DSM5AgentFlow studies this setting through a multi-agent LLM workflow for questionnaire-based mental health assessment and explainable mental disorder diagnosis~\cite{ozgun2025trustworthyaipsychotherapymultiagent}. An assistant agent conducts the assessment, a patient agent responds from a clinical profile, and a diagnostic agent produces a final report. The patient simulation is primarily cooperative: it follows the questionnaire and generally provides the profile information requested by the assistant.
 
 
 \parai{Client resistance.}
-In real mental health assessments, clients may not always respond cooperatively. They may give vague answers, avoid certain topics, deny existing problems, challenge the assessment, or ask for an immediate diagnosis. In this thesis, client resistance refers to response patterns that limit the clinical information available or interfere with the questionnaire-based assessment process. These behaviors may make it harder for the system to collect and interpret diagnostic evidence. This thesis therefore asks whether an LLM-based diagnostic dialogue system can maintain conversation and diagnostic quality when the simulated client is resistant.
+In real mental health assessments, clients may not always respond cooperatively. They may give vague answers, avoid certain topics, deny existing problems, challenge the assessment, or ask for an immediate diagnosis. In this thesis, client resistance refers to response patterns that reduce the availability of clinical information or interfere with the questionnaire-based assessment process. These behaviors may make it harder for the system to collect and interpret diagnostic evidence. This thesis therefore asks whether an LLM-based diagnostic dialogue system can maintain conversation and diagnostic quality when the simulated client is resistant.
 
 
 
 \parai{Approach.}
-This thesis investigates the impact of profile-based client resistance on LLM-generated mental health assessment dialogues. I extend DSM5AgentFlow by adding controllable resistance to its patient simulation. Under a resistant condition, the patient agent receives its original clinical profile together with a resistance configuration specifying the subcategory and intensity. The assigned intensity primarily controls how often resistance is expected to appear across questionnaire turns. When resistance is activated, expression-level guidance provides limited variation in how strongly the selected subcategory is expressed. This guidance supports response generation but is not treated as a separate experimental condition. The different resistance conditions can therefore be compared without changing the assigned clinical profile.
+This thesis investigates the impact of profile-based client resistance on LLM-generated mental health assessment dialogues. Based on this multi-agent workflow, we add a resistance configuration to the patient simulation. The configuration specifies a subcategory and intensity while the clinical profile remains unchanged. Intensity primarily controls how often resistance appears across questionnaire turns. Limited expression guidance varies how clearly the subcategory appears on activated turns without becoming a separate experimental condition.
 
 \parai{Evaluation.}
-The evaluation examines conversation quality, diagnostic quality, and the behavior of the resistant client. Conversation quality is measured using DSM-5 coverage, clinical relevance, logical consistency, empathy/professionalism, question responsiveness, and information yield. Diagnostic quality is measured using classification accuracy, text-match accuracy, diagnostic justification, classification confidence, and diagnostic certainty. Resistance fidelity, activation rate, answer length, short-answer rate, and nonresponse rate are used to check whether the intended resistance appears and to describe changes in patient responses.
+The evaluation examines conversation quality, diagnostic quality, and the behavior of the resistant client. Conversation quality is measured using DSM-5 coverage, clinical relevance, consistency, empathy/professionalism, question responsiveness, and information yield. Diagnostic quality is measured using classification accuracy, text-match accuracy, diagnostic justification, and diagnostic certainty. Resistance fidelity, activation rate, answer length, short-answer rate, and nonresponse rate are used to check whether the intended resistance appears and to describe changes in patient responses.
 
 We summarize our contributions as follows.
 
 \case{}
-We introduce a resistance taxonomy for constructing profile-based resistant clients. The taxonomy distinguishes between content-dimension resistance, which affects the information provided by the client, and interaction-dimension resistance, which affects the structure or relational dynamics of the assessment.
+We introduce a taxonomy for resistant-client profiles. It distinguishes content resistance, which affects the information provided by the client, from interaction resistance, which affects the structure or relational dynamics of the assessment.
 
 \case{}
-We extend DSM5AgentFlow with resistance profiles, turn-level activation, intensity control, a cooldown mechanism, and resistance metadata logging. These additions allow the resistance condition to be configured and recorded for each conversation.
+We implement resistance profiles, turn-level activation, intensity control, a cooldown mechanism, and resistance metadata logging within the multi-agent assessment workflow.
 
 \case{}
-We add profile-grounding controls for reframing-based resistance. These controls restrict minimization, externalization, and denial to questionnaire items that are supported by the clinical profile, reducing one source of profile-ungrounded symptom generation.
+We use the clinical profile to determine when reframing resistance can be applied. The patient may minimize, explain away, or deny a problem only when that problem is present in the assigned profile. This prevents the reframing instruction from being applied to symptoms that are not part of the simulated case.
 
 \case{}
-We evaluate how different resistant-client conditions affect conversation quality, diagnostic quality, and patient-response characteristics in generated mental health assessment dialogues.
+We evaluate 1,225 conversations across five clinical profiles, 12 resistance subcategories, and four intensity levels to measure changes in conversation quality, diagnostic quality, and patient-response characteristics.
 
 \iffalse
 \stress{Think before you write, be careful how you write, and take feedbacks
