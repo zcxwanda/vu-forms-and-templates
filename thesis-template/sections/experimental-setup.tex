@@ -54,7 +54,7 @@ conversations. Each saved record contains the assistant--patient dialogue, clini
 
 \subsection{Evaluation Metrics}
 
-The evaluation has three objectives: conversation quality, diagnostic quality, and resistance realization with behavioral characteristics. Table~\ref{tab:metrics-rq-map} maps the measures to these objectives and research questions.
+The evaluation has three objectives: conversation quality, diagnostic quality, and resistance realization and response characteristics. Table~\ref{tab:metrics-rq-map} maps the measures to these objectives and research questions.
 
 \begin{table*}[t]
     \centering
@@ -86,7 +86,7 @@ Four five-point rubric measures are based on the DSM5AgentFlow evaluation framew
 
 Classification accuracy compares the primary class assigned by the evaluator with the profile label. Text-match accuracy checks whether the expected disorder or a predefined name variant appears anywhere in the report; for example, ``depressive'' and ``MDD'' are accepted for depression, and ``post-traumatic'' is accepted for PTSD. The two measures can differ when a report mentions the expected disorder but selects another primary diagnosis. Diagnostic justification measures how well the report supports its conclusion with evidence from the dialogue. Diagnostic certainty measures how clearly the report commits to its diagnostic conclusion. Justification and certainty use five-point scales.
 
-\subsubsection{Resistance Realization and Behavioral Characteristics}
+\subsubsection{Resistance Realization and Response Characteristics}
 
 Resistance fidelity is scored only on activated turns and measures how closely the response matches the assigned subcategory. The observed activation rate is calculated as activated questionnaire turns divided by all patient questionnaire turns. Mean answer length, short-answer rate, and nonresponse rate are calculated directly from questionnaire responses. A short answer contains at most three alphanumeric words. A nonresponse is empty, contains only an action, or consists of a silence or hesitation marker such as \texttt{[silence]}, ``huh'', or ``mmm''. These measures capture different response forms rather than one general resistance score: short answers and nonresponses are most relevant to withholding, while unusually long answers are most relevant to irrelevant verbosity. Responsiveness and information yield capture whether answers remain useful even when their length is similar to the baseline.
 
