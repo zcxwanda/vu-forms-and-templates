@@ -71,9 +71,9 @@ Controlling & 2.25 & 0.591 & 2.77 & 2.78 \\
 \label{fig:rq2-intensity}
 \end{figure*}
 
-Diagnostic accuracy and diagnostic certainty followed different patterns (Figure~\ref{fig:rq2-intensity}). Accuracy was robust from baseline through high intensity, even though certainty declined. The overall classification test detected a small difference across these conditions ($p=.039$, $V=.095$), but none of the pairwise differences remained significant after Holm correction. Text-match accuracy also did not differ reliably across these conditions (Table~\ref{tab:rq12-intensity-tests}).
+Diagnostic accuracy and diagnostic certainty followed different patterns (Figure~\ref{fig:rq2-intensity}). Classification accuracy showed a small descriptive decline from 1.000 at baseline to 0.963 at high intensity, but neither classification nor text-match accuracy differed significantly across the baseline-to-high conditions. Certainty, however, declined as resistance increased (Table~\ref{tab:rq12-intensity-tests}).
 
-In contrast, diagnostic certainty declined from 4.32 in the baseline to 3.72 at high intensity. The baseline--high pairwise difference remained significant after correction ($p=.014$), with a rank-biserial effect size of .312. Diagnostic justification also decreased, from 4.84 in the baseline to 4.41 at high intensity (Table~\ref{tab:rq12-intensity-tests}).
+Diagnostic certainty declined from 4.32 in the baseline to 3.72 at high intensity. The baseline--high pairwise difference remained significant after correction ($p=.014$), with a rank-biserial effect size of .312. Diagnostic justification also decreased, from 4.84 in the baseline to 4.41 at high intensity (Table~\ref{tab:rq12-intensity-tests}).
 
 Extreme resistance marked a clear break from the low-to-high pattern. Classification accuracy fell from 0.963 at high to 0.583 at extreme. The accuracy difference was 0.380 (95\% CI [0.319, 0.439], Holm-adjusted $p<.001$). Text-match accuracy showed a similar drop from 0.970 to 0.637. Diagnostic certainty decreased further to 3.30. Thus, accuracy remained robust through high intensity while the diagnostic language became less certain; under extreme resistance, both accuracy and certainty declined further.
 
@@ -92,15 +92,15 @@ Question responsiveness & $H(4)=300.11$ & $<.001$ & $\epsilon^2=.243$ \\
 Information yield & $H(4)=424.20$ & $<.001$ & $\epsilon^2=.344$ \\
 \midrule
 \multicolumn{4}{@{}l}{\textit{RQ2: baseline through high}} \\
-Classification accuracy & $\chi^2(3)=8.36$ & $.039$ & $V=.095$ \\
-Text-match accuracy & $\chi^2(3)=6.86$ & $.077$ & $V=.086$ \\
+Classification accuracy & Fisher exact & $.081$ & $V=.095$ \\
+Text-match accuracy & Fisher exact & $.069$ & $V=.086$ \\
 Diagnostic justification & $H(3)=50.70$ & $<.001$ & $\epsilon^2=.052$ \\
 Diagnostic certainty & $H(3)=24.77$ & $<.001$ & $\epsilon^2=.024$ \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Across all resistant conditions, classification accuracy ranged from 0.830 for contesting to 0.987 for reframing (Table~\ref{tab:rq2-category}). However, this comparison includes reframing's much lower activation rate. After reframing was excluded, primary classification accuracy did not differ across the other four categories. Text-match accuracy, diagnostic justification, and diagnostic certainty did differ, although their effect sizes were small.\footnote{Category tests excluding reframing: classification accuracy, $\chi^2(3)=0.72$, $p=.869$, $V=.028$; text-match accuracy, $\chi^2(3)=11.35$, $p=.010$, $V=.112$; diagnostic justification, $H(3)=42.06$, $p<.001$, $\epsilon^2=.044$; diagnostic certainty, $H(3)=52.82$, $p<.001$, $\epsilon^2=.056$.} Pairwise comparisons showed that withholding received lower justification scores than each of the other non-reframing categories. Diverting received higher certainty scores than withholding, contesting, and controlling. Category therefore had a clearer effect on how the diagnostic conclusion was supported and expressed than on whether the primary classification was correct.
+Across all resistant conditions, classification accuracy ranged from 0.830 for contesting to 0.987 for reframing (Table~\ref{tab:rq2-category}). However, this comparison includes reframing's much lower activation rate. After reframing was excluded, primary classification accuracy did not differ across the other four categories. Text-match accuracy, diagnostic justification, and diagnostic certainty did differ, although their effect sizes were small.\footnote{Category tests excluding reframing: classification accuracy, $\chi^2(3)=0.72$, $p=.869$, $V=.028$; text-match accuracy, $\chi^2(3)=11.35$, $p=.010$, $V=.112$; diagnostic justification, $H(3)=42.06$, $p<.001$, $\epsilon^2=.044$; diagnostic certainty, $H(3)=52.82$, $p<.001$, $\epsilon^2=.056$.} Pairwise comparisons showed that withholding received lower justification scores than each of the other non-reframing categories. Diverting received higher certainty scores than withholding, contesting, and controlling. Resistance category had a clearer effect on the justification and certainty of the diagnostic report than on whether the primary diagnosis was correct.
 
 \begin{table}[t]
 \centering
@@ -121,7 +121,7 @@ Controlling & 0.847 & 0.827 & 4.51 & 3.40 \\
 }
 \end{table}
 
-Diagnostic accuracy also differed by category under extreme intensity ($\chi^2(4)=63.89$, $p<.001$, $V=.462$). Reframing retained classification accuracy of 0.973, while the other category means ranged from 0.400 to 0.480. This contrast should not be interpreted as a pure category effect: extreme reframing was still restricted to truth-map-positive turns, whereas the other categories were activated on every questionnaire turn.
+Diagnostic accuracy also differed by category under extreme intensity ($\chi^2(4)=63.89$, $p<.001$, $V=.462$). Reframing retained classification accuracy of 0.973, while the other category means ranged from 0.400 to 0.480. The high accuracy for reframing is not directly comparable with the other categories. Extreme reframing was activated only on truth-map-positive turns, while the other categories were activated on every questionnaire turn.
 
 Several misclassified conversations from the extreme condition were reviewed as examples of diagnostic failure. In one PTSD conversation in the silence condition, the patient did not endorse the symptom, but the report treated the questionnaire item as evidence.
 
@@ -156,7 +156,7 @@ Patient-side conversation quality was positively associated with both the overal
 \label{fig:rq3-quartiles}
 \end{figure}
 
-Classification accuracy was analyzed separately because each diagnosis was coded as either correct or incorrect. The regression included resistance condition and clinical profile as control variables. In this adjusted model, conversations with higher information yield were more likely to be classified correctly (OR=3.64, 95\% CI [2.65, 5.01], $p<.001$). This relationship was not statistically significant when the extreme condition was removed (OR=1.74, 95\% CI [0.89, 3.38], $p=.103$). However, only 17 of the 925 baseline-to-high conversations were misclassified. This strong ceiling effect left too little variation to estimate the relationship reliably.
+Across all conditions, conversations with higher information yield were more often classified correctly. The relationship remained significant when resistance condition and clinical profile were included in the logistic regression (OR=3.64, 95\% CI [2.65, 5.01], $p<.001$). However, it was no longer statistically significant after the extreme condition was removed (OR=1.74, 95\% CI [0.89, 3.38], $p=.103$). Only 17 of the 925 baseline-to-high conversations were misclassified. There were therefore too few errors to determine whether information yield was related to accuracy within these conditions.
 
 Table~\ref{tab:rq3-associations} summarizes these associations across all conditions and in the baseline-to-high subset.
 
