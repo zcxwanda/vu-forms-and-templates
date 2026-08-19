@@ -1,10 +1,10 @@
 \section{Results}\label{s:results}
 
-This section first checks whether the intended resistance was generated and then answers the four research questions. In the tables, accuracy and activation rates are proportions from 0 to 1. The remaining evaluation measures use five-point scales, where a higher value indicates more of the property named by the measure. For the statistical tests, $p<.05$ indicates evidence of a difference, while effect sizes closer to zero indicate a weaker difference. All 1,225 conversations have complete conversation-quality, diagnostic-quality, responsiveness, and information-yield scores. Resistance fidelity is undefined for the 25 baseline conversations and for five low-intensity reframing conversations with no activated turns. Fidelity analyses therefore use the remaining 1,195 resistant conversations.
+This section first checks whether the intended resistance was generated and then answers the four research questions. In the tables, classification accuracy, text-match accuracy, and activation rates are proportions from 0 to 1. The remaining evaluation measures use five-point scales, where a higher value indicates more of the property named by the measure. For the statistical tests, $p<.05$ indicates evidence of a difference, while effect sizes closer to zero indicate a weaker difference. All 1,225 conversations have complete conversation-quality, diagnostic-quality, responsiveness, and information-yield scores. Resistance fidelity is undefined for the 25 baseline conversations and for five low-intensity reframing conversations with no activated turns. Fidelity analyses therefore use the remaining 1,195 resistant conversations.
 
 \subsection{Resistance Manipulation Check}
 
-The observed activation rate increased as intended, from 0.170 at low intensity to 0.370 at medium, 0.594 at high, and 0.820 at extreme. Under extreme intensity, non-reframing activation reached 1.0, while reframing activation remained at 0.278 because it was limited to truth-map-positive items.
+The observed activation rate increased as intended, from 0.170 at low intensity to 0.370 at medium, 0.594 at high, and 0.820 at extreme. Reframing appeared less often when activation was divided by all questionnaire turns because only 480 of its 1,725 turns were truth-map-positive. When only these eligible turns were counted, its activation rate increased from 0.231 at low intensity to 0.452 at medium, 0.727 at high, and 1.000 at extreme. These rates closely matched the corresponding non-reframing rates.
 
 Resistance fidelity remained stable across conditions, with mean scores between 4.89 and 4.94 (Table~\ref{tab:manipulation-check}). The manipulation therefore changed how often resistance appeared while preserving a close match between generated responses and the assigned subcategory.
 
@@ -13,14 +13,14 @@ Resistance fidelity remained stable across conditions, with mean scores between 
 \caption{Observed activation rates and resistance fidelity by intensity.}
 \label{tab:manipulation-check}
 \resizebox{\linewidth}{!}{%
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Condition & Overall & Reframing & Non-reframing & Fidelity \\
+Condition & Overall & \shortstack{Reframing\\all turns} & \shortstack{Reframing\\eligible turns} & Non-reframing & Fidelity \\
 \midrule
-Low & 0.170 & 0.064 & 0.206 & 4.89 \\
-Medium & 0.370 & 0.126 & 0.452 & 4.89 \\
-High & 0.594 & 0.202 & 0.725 & 4.91 \\
-Extreme & 0.820 & 0.278 & 1.000 & 4.94 \\
+Low & 0.170 & 0.064 & 0.231 & 0.206 & 4.89 \\
+Medium & 0.370 & 0.126 & 0.452 & 0.452 & 4.89 \\
+High & 0.594 & 0.202 & 0.727 & 0.725 & 4.91 \\
+Extreme & 0.820 & 0.278 & 1.000 & 1.000 & 4.94 \\
 \bottomrule
 \end{tabular}
 }
@@ -71,11 +71,11 @@ Controlling & 2.25 & 0.591 & 2.77 & 2.78 \\
 \label{fig:rq2-intensity}
 \end{figure*}
 
-Diagnostic accuracy and diagnostic certainty followed different patterns (Figure~\ref{fig:rq2-intensity}). Classification accuracy showed a small descriptive decline from 1.000 at baseline to 0.963 at high intensity, but neither classification nor text-match accuracy differed significantly across the baseline-to-high conditions. Certainty, however, declined as resistance increased (Table~\ref{tab:rq12-intensity-tests}).
+Classification accuracy and diagnostic certainty followed different patterns (Figure~\ref{fig:rq2-intensity}). Classification accuracy showed a small descriptive decline from 1.000 (25/25) at baseline to 0.963 (289/300) at high intensity, but neither classification nor text-match accuracy differed significantly across the baseline-to-high conditions. Certainty, however, declined as resistance increased (Table~\ref{tab:rq12-intensity-tests}). Classification counts for each clinical profile are reported in Table~\ref{tab:profile-condition-accuracy} in the appendix.
 
 Diagnostic certainty declined from 4.32 in the baseline to 3.72 at high intensity. The baseline--high pairwise difference remained significant after correction ($p=.014$), with a rank-biserial effect size of .312. Diagnostic justification also decreased, from 4.84 in the baseline to 4.41 at high intensity (Table~\ref{tab:rq12-intensity-tests}).
 
-Extreme resistance marked a clear break from the low-to-high pattern. Classification accuracy fell from 0.963 at high to 0.583 at extreme. The accuracy difference was 0.380 (95\% CI [0.319, 0.439], Holm-adjusted $p<.001$). Text-match accuracy showed a similar drop from 0.970 to 0.637. Diagnostic certainty decreased further to 3.30. Thus, accuracy remained robust through high intensity while the diagnostic language became less certain; under extreme resistance, both accuracy and certainty declined further.
+The extreme stress test marked a clear break from the low-to-high pattern. Classification accuracy fell from 0.963 (289/300) at high to 0.583 (175/300) at extreme. The classification-accuracy difference was 0.380 (95\% CI [0.319, 0.439], Holm-adjusted $p<.001$). Text-match accuracy showed a similar drop from 0.970 to 0.637. Diagnostic certainty decreased further to 3.30. From baseline through high intensity, classification accuracy changed little while diagnostic certainty decreased. In the extreme stress test, both measures declined further.
 
 \begin{table}[t]
 \centering
@@ -121,7 +121,7 @@ Controlling & 0.847 & 0.827 & 4.51 & 3.40 \\
 }
 \end{table}
 
-Diagnostic accuracy also differed by category under extreme intensity ($\chi^2(4)=63.89$, $p<.001$, $V=.462$). Reframing retained classification accuracy of 0.973, while the other category means ranged from 0.400 to 0.480. The high accuracy for reframing is not directly comparable with the other categories. Extreme reframing was activated only on truth-map-positive turns, while the other categories were activated on every questionnaire turn.
+Classification accuracy also differed by category under extreme intensity ($\chi^2(4)=63.89$, $p<.001$, $V=.462$). Reframing retained classification accuracy of 0.973, while the other category means ranged from 0.400 to 0.480. The high accuracy for reframing is not directly comparable with the other categories. Extreme reframing was activated only on truth-map-positive turns, while the other categories were activated on every questionnaire turn.
 
 Several misclassified conversations from the extreme condition were reviewed as examples of diagnostic failure. In one PTSD conversation in the silence condition, the patient did not endorse the symptom, but the report treated the questionnaire item as evidence.
 
@@ -156,13 +156,13 @@ RQ3 focuses on information yield because it measures how much clinically useful 
 \label{fig:rq3-quartiles}
 \end{figure}
 
-Higher information yield was also associated with correct classification. This relationship remained significant when resistance condition and clinical profile were included in the logistic regression (OR=3.64, 95\% CI [2.65, 5.01], $p<.001$). However, it was no longer statistically significant after the extreme condition was removed (OR=1.74, 95\% CI [0.89, 3.38], $p=.103$). Only 17 of the 925 baseline-to-high conversations were misclassified. There were therefore too few errors to determine whether information yield was related to accuracy within these conditions.
+Higher information yield was also associated with correct classification. This relationship remained significant when resistance condition and clinical profile were included in the logistic regression (OR=3.64, 95\% CI [2.65, 5.01], $p<.001$). However, it was no longer statistically significant after the extreme condition was removed (OR=1.74, 95\% CI [0.89, 3.38], $p=.103$). Only 17 of the 925 baseline-to-high conversations were misclassified. There were therefore too few errors to determine whether information yield was related to classification accuracy within these conditions.
 
 Table~\ref{tab:rq3-associations} summarizes these associations across all conditions and in the baseline-to-high subset.
 
 \begin{table}[H]
 \centering
-\caption{Associations of information yield with conversation and diagnostic outcomes.}
+\caption{Associations between information yield and diagnostic outcomes.}
 \label{tab:rq3-associations}
 \small
 \begin{tabularx}{\linewidth}{@{}Xcc@{}}
